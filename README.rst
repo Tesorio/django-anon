@@ -158,3 +158,7 @@ provide high-quality fake data:
 
       class Meta:
          model = Address
+
+----
+
+`Icon <icon.svg>`_ made by `Eucalyp <https://www.flaticon.com/authors/eucalyp>`_ from `www.flaticon.com <https://www.flaticon.com/>`_
