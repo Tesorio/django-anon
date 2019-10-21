@@ -11,10 +11,8 @@ setup(
     author="Tesorio",
     url="http://github.com/Tesorio/django-anon",
     license="MIT",
-    zip_safe=False,
     platforms=["any"],
     packages=find_packages(),
-    package_data={},
     classifiers=[
         "Development Status :: 5 - Production/Stable",
         "Intended Audience :: Developers",
@@ -25,6 +23,5 @@ setup(
         "Programming Language :: Python :: 2",
         "Programming Language :: Python :: 3",
     ],
-    include_package_data=True,
     install_requires=["django-bulk-update", "django-chunkator"],
 )
