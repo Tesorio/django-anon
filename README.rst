@@ -5,7 +5,7 @@
 django-anon
 -----------
 
-.. image:: https://circleci.com/gh/Tesorio/django-anon.svg?style=svg
+.. image:: https://circleci.com/gh/Tesorio/django-anon.svg?style=svg&circle-token=373da2a214669014ef040e5a06a7f1a974902daa
     :target: https://circleci.com/gh/Tesorio/django-anon
 
 This app emerged from the need to create a database copy that is close to a
