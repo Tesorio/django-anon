@@ -43,7 +43,7 @@ class BaseTestCase(TestCase):
 
         anonymizer = Anon()
         result = anonymizer.get_queryset()
-        self.assertItemsEqual(result, [sample_obj])
+        self.assertEqual(result, [sample_obj])
         m.objects.all.assert_called_once()
 
     def test_patch_object(self):
@@ -67,8 +67,8 @@ class BaseTestCase(TestCase):
         self.assertEqual(obj.last_name, '')
         self.assertEqual(obj.raw_data, {})
 
-    @mock.patch('core.anonymizer.base.bulk_update')
-    @mock.patch('core.anonymizer.base.chunkator_page')
+    @mock.patch('anon.base.bulk_update')
+    @mock.patch('anon.base.chunkator_page')
     def test_run(self, chunkator_page, bulk_update):
         class Anon(BaseAnonymizer):
             class Meta:
@@ -173,6 +173,4 @@ class BaseTestCase(TestCase):
             b = lazy_attribute(lambda o: 5)
 
         anonymizer = Anon()
-        self.assertEqual(anonymizer.get_declarations().keys(), [
-            'y', 'z', 'x', 'a', 'c', 'b',
-        ])
+        self.assertEqual(list(anonymizer.get_declarations().keys()), ['a', 'c', 'b'])
