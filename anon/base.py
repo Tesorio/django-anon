@@ -50,7 +50,7 @@ def lazy_attribute(lazy_fn):
 class BaseAnonymizer(object):
     def run(self, select_chunk_size=None, **bulk_update_kwargs):
         queryset = self.get_queryset()
-        update_fields = self.get_declarations().keys()
+        update_fields = list(self.get_declarations().keys())
         update_batch_size = bulk_update_kwargs.pop(
             'batch_size', self._meta.update_batch_size)
 
