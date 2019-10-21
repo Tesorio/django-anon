@@ -5,16 +5,16 @@ import random
 # django
 from django.test import TestCase
 
-# deps
-import mock
+# first party
+from anon import utils
 
 # local
-from .. import utils
+from .compat import mock
 
 
 class UtilsTestCase(TestCase):
     def setUp(self):
-        utils._word_generator = itertools.cycle(utils.WORD_LIST)
+        utils._word_generator = itertools.cycle(utils._WORD_LIST)
         utils._number_generator = itertools.cycle('123456789')
 
     def test_fake_word(self):

@@ -1,11 +1,11 @@
 # django
 from django.test import TestCase
 
-# deps
-import mock
+# first party
+from anon import BaseAnonymizer, lazy_attribute
 
 # local
-from .. import BaseAnonymizer, lazy_attribute
+from .compat import mock
 
 
 class BaseTestCase(TestCase):
@@ -165,9 +165,6 @@ class BaseTestCase(TestCase):
     def test_get_declarations(self):
         # Ensure the order is preserved
         class Anon(BaseAnonymizer):
-            z = 1
-            x = lazy_attribute(lambda o: 3)
-            y = 2
             a = lazy_attribute(lambda o: 4)
             c = lazy_attribute(lambda o: 6)
             b = lazy_attribute(lambda o: 5)
