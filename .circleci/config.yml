@@ -5,4 +5,4 @@
        - image: circleci/python:3.6
      steps:
        - checkout
-       - run: pip install tox && tox
+       - run: pip install tox --user circleci && tox
