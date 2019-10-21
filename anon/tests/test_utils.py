@@ -5,16 +5,17 @@ import random
 # django
 from django.test import TestCase
 
+# deps
+import mock
+
 # local
 from .. import utils
 
 
 class UtilsTestCase(TestCase):
     def setUp(self):
-        utils.word_generator = itertools.cycle(utils.WORD_LIST)
-        utils.number_generator = itertools.cycle('123456789')
-
-        random.seed(1)  # use fixed seed
+        utils._word_generator = itertools.cycle(utils.WORD_LIST)
+        utils._number_generator = itertools.cycle('123456789')
 
     def test_fake_word(self):
         text = utils.fake_word(min_size=6)
@@ -36,12 +37,16 @@ class UtilsTestCase(TestCase):
         expected = 'A Ab Accusamus'
         self.assertEqual(text, expected)
 
-    def test_fake_username(self):
+    @mock.patch("random.randint")
+    def test_fake_username(self, mock_randint):
+        mock_randint.return_value = 135229
         text = utils.fake_username(15, separator='_')
         expected = 'a_ab_ad135229'
         self.assertEqual(text, expected)
 
-    def test_fake_email(self):
+    @mock.patch("random.randint")
+    def test_fake_email(self, mock_randint):
+        mock_randint.return_value = 135229
         text = utils.fake_email(20)
         expected = 'a135229@example.com'
         self.assertEqual(text, expected)
