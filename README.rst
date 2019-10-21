@@ -5,6 +5,9 @@
 django-anon
 -----------
 
+.. image:: https://circleci.com/gh/Tesorio/django-anon.svg?style=svg
+    :target: https://circleci.com/gh/Tesorio/django-anon
+
 This app emerged from the need to create a database copy that is close to a
 production database in terms of size and relationships, but that should also
 not contain any sensitive/identifiable data.
