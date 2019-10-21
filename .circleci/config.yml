@@ -1,8 +1,39 @@
- version: 2
- jobs:
-   build:
-     docker:
-       - image: circleci/python:3.6
-     steps:
-       - checkout
-       - run: pip install tox --user circleci && tox
+version: 2.1
+
+
+commands:
+  run_tox:
+    steps:
+      - run: pip install tox --user circleci && tox -e $CIRCLE_JOB
+
+
+jobs:
+  py27-django18:
+    docker:
+      - image: circleci/python:3.6
+    steps:
+      - checkout
+      - run_tox
+
+  py27-django111:
+    docker:
+      - image: circleci/python:3.6
+    steps:
+      - checkout
+      - run_tox
+
+  py36-django2:
+    docker:
+      - image: circleci/python:3.6
+    steps:
+      - checkout
+      - run_tox
+
+
+workflows:
+  version: 2
+  build-all:
+    jobs:
+      - py27-django18
+      - py27-django111
+      - py36-django2
