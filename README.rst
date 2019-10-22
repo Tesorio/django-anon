@@ -12,6 +12,7 @@ This app emerged from the need to create a database copy that is close to a
 production database in terms of size and relationships, but that should also
 not contain any sensitive/identifiable data.
 
+.. image:: django-anon-recording.gif
 
 While some other apps like `Factory Boy <https://factoryboy.readthedocs.io/en/latest/index.html>`_
 makes it easy to create fixtures that can be used to create a fake database, it
