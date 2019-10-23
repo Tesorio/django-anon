@@ -35,7 +35,7 @@ Talk is cheap. Show me the code!
 
 .. code-block:: python
 
-   import django_anon as anon
+   import anon
 
    class UserAnonymizer(anon.BaseAnonymizer):
       email = anon.fake_email
@@ -55,7 +55,7 @@ Use :class:`anon.BaseAnonymizer` to define your anonymizer classes:
 
 .. code-block:: python
 
-   import django_anon as anon
+   import anon
    from your_app.models import Person
 
    class PersonAnonymizer(anon.BaseAnonymizer):
@@ -73,7 +73,7 @@ Static data
 
 .. code-block:: python
 
-   import django_anon as anon
+   import anon
    from your_app.models import Person
 
    class PersonAnonymizer(anon.BaseAnonymizer):
@@ -92,7 +92,7 @@ using the :func:`anon.lazy_attribute` function/decorator.
 
 .. code-block:: python
 
-   import django_anon as anon
+   import anon
    from your_app.models import Person
 
    class PersonAnonymizer(anon.BaseAnonymizer):
@@ -112,7 +112,7 @@ Clean method
 
 .. code-block:: python
 
-   import django_anon as anon
+   import anon
 
    class UserAnonymizer(anon.BaseAnonymizer):
       class Meta:
@@ -130,7 +130,7 @@ A custom QuerySet can be used to select the rows that should be anonymized:
 
 .. code-block:: python
 
-   import django_anon as anon
+   import anon
    from your_app.models import Person
 
    class PersonAnonymizer(anon.BaseAnonymizer):
@@ -152,7 +152,7 @@ provide high-quality fake data:
 
 .. code-block:: python
 
-   import django_anon as anon
+   import anon
    from faker import Faker
    from your_app.models import Address
 
