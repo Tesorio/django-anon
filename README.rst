@@ -23,6 +23,14 @@ in a production-like environment.
 
 .. image:: django-anon-recording.gif
 
+Features
+========
+
+.. csv-table::
+
+   "🚀", "**Really fast** data anonymization and database operations using bulk updates to operate over huge tables"
+   "🍰", "**Flexible** to use your own anonymization functions or external libraries like `Faker <https://faker.readthedocs.io/en/latest/index.html>`_"
+
 Table of Contents
 =================
 .. contents::
