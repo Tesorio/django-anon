@@ -24,7 +24,7 @@ in a production-like environment.
 .. image:: django-anon-recording.gif
 
 Features
-========
+########
 
 .. csv-table::
 
@@ -34,13 +34,13 @@ Features
    "🔨", "**Powerful**. It can be used on any projects, not only Django, not only Python. Really!"
 
 Table of Contents
-=================
+#################
 .. contents::
    :local:
 
 
 Usage
------
+=====
 
 Use ``anon.BaseAnonymizer`` to define your anonymizer classes:
 
@@ -59,8 +59,8 @@ Use ``anon.BaseAnonymizer`` to define your anonymizer classes:
    PersonAnonymizer().run()
 
 
-Static data
------------
+Using static values
+-------------------
 
 .. code-block:: python
 
@@ -75,8 +75,8 @@ Static data
          model = Person
 
 
-Lazy data
----------
+Using lazy values
+-----------------
 
 Lazy attributes can be defined as inline lambdas or methods, as shown below,
 using the :func:`anon.lazy_attribute` function/decorator.
@@ -98,8 +98,8 @@ using the :func:`anon.lazy_attribute` function/decorator.
          model = Person
 
 
-Clean method
-------------
+The clean method
+----------------
 
 .. code-block:: python
 
@@ -114,8 +114,8 @@ Clean method
          obj.save()
 
 
-Custom QuerySet
----------------
+Using a custom QuerySet
+-----------------------
 
 A custom QuerySet can be used to select the rows that should be anonymized:
 
