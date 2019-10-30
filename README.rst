@@ -30,6 +30,8 @@ Features
 
    "🚀", "**Really fast** data anonymization and database operations using bulk updates to operate over huge tables"
    "🍰", "**Flexible** to use your own anonymization functions or external libraries like `Faker <https://faker.readthedocs.io/en/latest/index.html>`_"
+   "🐩", "**Elegant** solution following consolidated patterns from projects like `Django <https://djangoproject.com/>`_ and `Factory Boy <https://factoryboy.readthedocs.io/en/latest/index.html>`_"
+   "🔨", "**Powerful**. It can be used on any projects, not only Django, not only Python. Really!"
 
 Table of Contents
 =================
