@@ -1,57 +1,48 @@
 .. raw:: html
 
-    <img src="icon.svg" width="128">
+    <p align="center">
+      <a href="https://github.com/Tesorio/django-anon">
+        <img src="icon.svg" width="128">
+      </a>
+    </p>
 
-django-anon
------------
+    <h1 align="center">django-anon</h1>
+    <p align="center">
+      <strong>:shipit: Anonymize production data so it can be safely used in not-so-safe environments</strong>
+    </p>
 
-.. image:: https://circleci.com/gh/Tesorio/django-anon.svg?style=svg&circle-token=373da2a214669014ef040e5a06a7f1a974902daa
-    :target: https://circleci.com/gh/Tesorio/django-anon
+    <p align="center">
+      <a href="https://circleci.com/gh/Tesorio/django-anon">
+        <img src="https://circleci.com/gh/Tesorio/django-anon.svg?style=svg&circle-token=373da2a214669014ef040e5a06a7f1a974902daa">
+      </a>
+    </p>
 
-This app emerged from the need to create a database copy that is close to a
-production database in terms of size and relationships, but that should also
-not contain any sensitive/identifiable data.
+**django-anon** will help you anonymize your production database so it can be
+shared among developers, helping to reproduce bugs and make performance improvements
+in a production-like environment.
 
 .. image:: django-anon-recording.gif
 
-While some other apps like `Factory Boy <https://factoryboy.readthedocs.io/en/latest/index.html>`_
-makes it easy to create fixtures that can be used to create a fake database, it
-may be a hard task to create one that is really close to what you have in
-production, specially when you think about all kinds of relationships between
-objects that may exist in a real world usage.
+Features
+########
 
-We defined some rules that we should follow to make this work as we need:
+.. csv-table::
 
-* It must be **safe™** – the app does not provide an easy way to mess with your
-  stuff.
-* It must be **fast™** – while you can use `Faker <https://faker.readthedocs.io/en/latest/index.html>`_,
-  that generates high-quality fake data, it is up to you. We provide a built-in
-  library that generates fake data with focus on being fast, as your database
-  may be huge.
-* It must be **fun™** – we love Factory Boy, so we built a similar experience
-  for writing your anonymizers. It's fun and really flexible!
+   "🚀", "**Really fast** data anonymization and database operations using bulk updates to operate over huge tables"
+   "🍰", "**Flexible** to use your own anonymization functions or external libraries like `Faker <https://faker.readthedocs.io/en/latest/index.html>`_"
+   "🐩", "**Elegant** solution following consolidated patterns from projects like `Django <https://djangoproject.com/>`_ and `Factory Boy <https://factoryboy.readthedocs.io/en/latest/index.html>`_"
+   "🔨", "**Powerful**. It can be used on any projects, not only Django, not only Python. Really!"
 
-Talk is cheap. Show me the code!
-
-.. code-block:: python
-
-   import anon
-
-   class UserAnonymizer(anon.BaseAnonymizer):
-      email = anon.fake_email
-
-      class Meta:
-         model = User
-
-      def clean(self, obj):
-         obj.set_password('test')
-         obj.save()
+Table of Contents
+#################
+.. contents::
+   :local:
 
 
-Basic Usage
------------
+Usage
+=====
 
-Use :class:`anon.BaseAnonymizer` to define your anonymizer classes:
+Use ``anon.BaseAnonymizer`` to define your anonymizer classes:
 
 .. code-block:: python
 
@@ -60,6 +51,9 @@ Use :class:`anon.BaseAnonymizer` to define your anonymizer classes:
 
    class PersonAnonymizer(anon.BaseAnonymizer):
       email = anon.fake_email
+      
+      # You can use static values instead of callables
+      is_admin = False
 
       class Meta:
          model = Person
@@ -68,27 +62,26 @@ Use :class:`anon.BaseAnonymizer` to define your anonymizer classes:
    PersonAnonymizer().run()
 
 
-Static data
------------
+Built-in functions
+------------------
 
-.. code-block:: python
+.. code:: python
 
-   import anon
-   from your_app.models import Person
+   fake_word(min_size=_min_word_size, max_size=20)
+   fake_text(max_size=255, max_diff_allowed=5, separator=' ')
+   fake_small_text(max_size=50)
+   fake_name(max_size=15)
+   fake_username(max_size=10, separator='', rand_range=(1000, 999999))
+   fake_email(max_size=25, suffix='@example.com')
+   fake_url(max_size=50, scheme='http://', suffix='.com')
+   fake_phone_number(format='999-999-9999')
 
-   class PersonAnonymizer(anon.BaseAnonymizer):
-      is_admin = False
-      some_other_field = ''
 
-      class Meta:
-         model = Person
-
-
-Lazy data
----------
+Lazy attributes
+---------------
 
 Lazy attributes can be defined as inline lambdas or methods, as shown below,
-using the :func:`anon.lazy_attribute` function/decorator.
+using the ``anon.lazy_attribute`` function/decorator.
 
 .. code-block:: python
 
@@ -107,8 +100,8 @@ using the :func:`anon.lazy_attribute` function/decorator.
          model = Person
 
 
-Clean method
-------------
+The clean method
+----------------
 
 .. code-block:: python
 
@@ -123,8 +116,8 @@ Clean method
          obj.save()
 
 
-Custom QuerySet
----------------
+Defining a custom QuerySet
+--------------------------
 
 A custom QuerySet can be used to select the rows that should be anonymized:
 
@@ -144,11 +137,13 @@ A custom QuerySet can be used to select the rows that should be anonymized:
          return Person.objects.exclude(is_admin=True)
 
 
-Faker
------
+High-quality fake data
+----------------------
 
-`Faker <https://faker.readthedocs.io/en/latest/index.html>`_ can be used to
-provide high-quality fake data:
+In order to be really fast, **django-anon** uses it's own algorithm to generate fake data. It is
+really fast, but the generated data is not pretty. If you need something prettier in terms of data,
+we suggest using `Faker <https://faker.readthedocs.io/en/latest/index.html>`_, which can be used
+out-of-the-box as the below:
 
 .. code-block:: python
 
