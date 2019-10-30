@@ -23,6 +23,11 @@ in a production-like environment.
 
 .. image:: django-anon-recording.gif
 
+Table of Contents
+=================
+.. contents::
+   :local:
+
 While some other apps like `Factory Boy <https://factoryboy.readthedocs.io/en/latest/index.html>`_
 makes it easy to create fixtures that can be used to create a fake database, it
 may be a hard task to create one that is really close to what you have in
