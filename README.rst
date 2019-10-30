@@ -17,9 +17,9 @@
       </a>
     </p>
 
-This app emerged from the need to create a database copy that is close to a
-production database in terms of size and relationships, but that should also
-not contain any sensitive/identifiable data.
+**django-anon** will help you anonymize your production database so it can be
+shared among developers, helping to reproduce bugs and make performance improvements
+in a production-like environment.
 
 .. image:: django-anon-recording.gif
 
