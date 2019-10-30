@@ -11,11 +11,11 @@
       <strong>:shipit: Anonymize production data so it can be safely used in not-so-safe environments</strong>
     </p>
 
-django-anon
------------
-
-.. image:: https://circleci.com/gh/Tesorio/django-anon.svg?style=svg&circle-token=373da2a214669014ef040e5a06a7f1a974902daa
-    :target: https://circleci.com/gh/Tesorio/django-anon
+    <p align="center">
+      <a href="https://circleci.com/gh/Tesorio/django-anon">
+        <img src="https://circleci.com/gh/Tesorio/django-anon.svg?style=svg&circle-token=373da2a214669014ef040e5a06a7f1a974902daa">
+      </a>
+    </p>
 
 This app emerged from the need to create a database copy that is close to a
 production database in terms of size and relationships, but that should also
