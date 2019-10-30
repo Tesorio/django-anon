@@ -51,6 +51,9 @@ Use ``anon.BaseAnonymizer`` to define your anonymizer classes:
 
    class PersonAnonymizer(anon.BaseAnonymizer):
       email = anon.fake_email
+      
+      # You can use static values instead of callables
+      is_admin = False
 
       class Meta:
          model = Person
@@ -59,27 +62,11 @@ Use ``anon.BaseAnonymizer`` to define your anonymizer classes:
    PersonAnonymizer().run()
 
 
-Using static values
--------------------
-
-.. code-block:: python
-
-   import anon
-   from your_app.models import Person
-
-   class PersonAnonymizer(anon.BaseAnonymizer):
-      is_admin = False
-      some_other_field = ''
-
-      class Meta:
-         model = Person
-
-
-Using lazy values
------------------
+Lazy attributes
+---------------
 
 Lazy attributes can be defined as inline lambdas or methods, as shown below,
-using the :func:`anon.lazy_attribute` function/decorator.
+using the ``anon.lazy_attribute`` function/decorator.
 
 .. code-block:: python
 
@@ -114,8 +101,8 @@ The clean method
          obj.save()
 
 
-Using a custom QuerySet
------------------------
+Defining a custom QuerySet
+--------------------------
 
 A custom QuerySet can be used to select the rows that should be anonymized:
 
@@ -135,11 +122,13 @@ A custom QuerySet can be used to select the rows that should be anonymized:
          return Person.objects.exclude(is_admin=True)
 
 
-Faker
------
+High-quality fake data
+----------------------
 
-`Faker <https://faker.readthedocs.io/en/latest/index.html>`_ can be used to
-provide high-quality fake data:
+In order to be really fast, **django-anon** uses it's own algorithm to generate fake data. It is
+really fast, but the generated data is not pretty. If you need something prettier in terms of data,
+we suggest using `Faker <https://faker.readthedocs.io/en/latest/index.html>`_, which can be used
+out-of-the-box as the below:
 
 .. code-block:: python
 
