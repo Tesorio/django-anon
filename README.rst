@@ -38,44 +38,11 @@ Table of Contents
 .. contents::
    :local:
 
-While some other apps like `Factory Boy <https://factoryboy.readthedocs.io/en/latest/index.html>`_
-makes it easy to create fixtures that can be used to create a fake database, it
-may be a hard task to create one that is really close to what you have in
-production, specially when you think about all kinds of relationships between
-objects that may exist in a real world usage.
 
-We defined some rules that we should follow to make this work as we need:
+Usage
+-----
 
-* It must be **safe™** – the app does not provide an easy way to mess with your
-  stuff.
-* It must be **fast™** – while you can use `Faker <https://faker.readthedocs.io/en/latest/index.html>`_,
-  that generates high-quality fake data, it is up to you. We provide a built-in
-  library that generates fake data with focus on being fast, as your database
-  may be huge.
-* It must be **fun™** – we love Factory Boy, so we built a similar experience
-  for writing your anonymizers. It's fun and really flexible!
-
-Talk is cheap. Show me the code!
-
-.. code-block:: python
-
-   import anon
-
-   class UserAnonymizer(anon.BaseAnonymizer):
-      email = anon.fake_email
-
-      class Meta:
-         model = User
-
-      def clean(self, obj):
-         obj.set_password('test')
-         obj.save()
-
-
-Basic Usage
------------
-
-Use :class:`anon.BaseAnonymizer` to define your anonymizer classes:
+Use ``anon.BaseAnonymizer`` to define your anonymizer classes:
 
 .. code-block:: python
 
