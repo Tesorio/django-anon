@@ -1,6 +1,15 @@
 .. raw:: html
 
-    <img src="icon.svg" width="128">
+    <p align="center">
+      <a href="https://github.com/Tesorio/django-anon">
+        <img src="icon.svg" width="128">
+      </a>
+    </p>
+
+    <h1 align="center">django-anon</h1>
+    <p align="center">
+      <strong>:shipit: Anonymize production data so it can be safely used in not-so-safe environments</strong>
+    </p>
 
 django-anon
 -----------
