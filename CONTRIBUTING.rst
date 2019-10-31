@@ -9,12 +9,14 @@ Examples of contributions include:
 * Documentation improvements
 * Bug reports and code reviews
 
+
 Table of Contents
 #################
 
 .. contents::
    :local:
    
+
 Code of conduct
 ===============
 
@@ -23,6 +25,7 @@ Please keep the tone polite & professional. First impressions count, so let's tr
 Be mindful in the language you choose. As an example, in an environment that is heavily male-dominated, posts that start 'Hey guys,' can come across as unintentionally exclusive. It's just as easy, and more inclusive to use gender neutral language in those situations. (e.g. 'Hey folks,')
 
 The `Django code of conduct <https://www.djangoproject.com/conduct/>`_ gives a fuller set of guidelines for participating in community forums.
+
 
 Issues
 ======
@@ -34,6 +37,7 @@ Some tips on good issue reporting:
 * If reporting a bug, then try to include a pull request with a failing test case. This will help us quickly identify if there is a valid issue, and make sure that it gets fixed more quickly if there is one.
 * Closing an issue doesn't necessarily mean the end of a discussion. If you believe your issue has been closed incorrectly, explain why and we'll consider if it needs to be reopened.
 
+
 Development
 ===========
 
@@ -44,6 +48,7 @@ To start developing on **django-anon**, clone the repo:
    git clone https://github.com/Tesorio/django-anon
 
 Changes should broadly follow the PEP 8 style conventions, and we recommend you set up your editor to automatically indicate non-conforming styles.
+
 
 Testing
 =======
@@ -61,6 +66,7 @@ To run the tests, clone the repository, and then:
    # Run the tests
    ./runtests.py
    
+
 Running against multiple environments
 =====================================
 
@@ -69,7 +75,8 @@ You can also use the excellent tox testing tool to run the tests against all sup
 .. code::
 
    tox
-   
+
+
 Pull requests
 =============
 
@@ -84,6 +91,7 @@ GitHub's documentation for working on pull requests is `available here. <https:/
 Always run the tests before submitting pull requests, and ideally run tox in order to check that your modifications are compatible on all supported versions of Python and Django.
 
 Once you've made a pull request take a look at the CircleCI build status and make sure the tests are running as you'd expect.
+
 
 Documentation
 =============
@@ -103,6 +111,18 @@ Then from the ``docs/`` directory, build the HTML:
    make html
    
 To get started contributing, you’ll want to read the `reStructuredText reference. <http://www.sphinx-doc.org/en/master/usage/restructuredtext/index.html#rst-index>`_
+
+
+Language style
+==============
+
+Documentation should be in American English. The tone of the documentation is very important - try to stick to a simple, plain, objective and well-balanced style where possible.
+
+Some other tips:
+
+* Keep paragraphs reasonably short.
+* Don't use abbreviations such as 'e.g.' but instead use the long form, such as 'For example'.
+
 
 References
 ==========
