@@ -1,18 +1,59 @@
-from setuptools import setup, find_packages
+import os
+import sys
+from setuptools import setup, find_packages, Command
 
 
-VERSION = "0.1"
+# Dynamically calculate the version based on anon.VERSION
+VERSION = __import__("anon").__version__
+
+
+with open("README.rst") as readme_file:
+    README = readme_file.read()
+
+
+class PublishCommand(Command):
+    description = "Publish to PyPI"
+    user_options = []
+
+    def run(self):
+        os.system("python setup.py sdist bdist_wheel")
+
+    def initialize_options(self):
+        pass
+
+    def finalize_options(self):
+        pass
+
+
+class CreateTagCommand(Command):
+    description = "Create release tag"
+    user_options = []
+
+    def run(self):
+        os.system("git tag -a %s -m 'v%s'" % (VERSION, VERSION))
+        os.system("git push --tags")
+
+    def initialize_options(self):
+        pass
+
+    def finalize_options(self):
+        pass
 
 
 setup(
     name="django-anon",
     version=VERSION,
+    packages=find_packages(),
+    install_requires=["django-bulk-update", "django-chunkator"],
+    cmdclass={"publish": PublishCommand, "tag": CreateTagCommand},
+    # metadata for upload to PyPI
     description="Anonymize production data so it can be safely used in not-so-safe environments",
+    long_description=README,
     author="Tesorio",
-    url="http://github.com/Tesorio/django-anon",
+    author_email="hello@tesorio.com",
+    url="https://github.com/Tesorio/django-anon",
     license="MIT",
     platforms=["any"],
-    packages=find_packages(),
     classifiers=[
         "Development Status :: 5 - Production/Stable",
         "Intended Audience :: Developers",
@@ -23,5 +64,4 @@ setup(
         "Programming Language :: Python :: 2",
         "Programming Language :: Python :: 3",
     ],
-    install_requires=["django-bulk-update", "django-chunkator"],
 )
