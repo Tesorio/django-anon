@@ -174,6 +174,12 @@ out-of-the-box as the below:
       class Meta:
          model = Address
 
+
+Changelog
+=========
+
+Check out `CHANGELOG.rst <https://github.com/Tesorio/django-anon/blob/master/CHANGELOG.rst>`_ for release notes
+
 Contributing
 ============
 
