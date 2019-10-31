@@ -41,6 +41,18 @@ Table of Contents
 .. contents::
    :local:
 
+Installation
+============
+
+.. code::
+
+   pip install djangorestframework
+   
+Requirements
+============
+
+* Python (2.7, 3.6)
+* Django (1.8, 1.11, 2.2)
 
 Usage
 =====
