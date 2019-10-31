@@ -162,6 +162,10 @@ out-of-the-box as the below:
       class Meta:
          model = Address
 
+Contributing
+============
+
+Check out `CONTRIBUTING.rst <https://github.com/Tesorio/django-anon/blob/master/CONTRIBUTING.rst>`_ for information about getting involved
 
 License
 =======
