@@ -46,7 +46,7 @@ Installation
 
 .. code::
 
-   pip install djangorestframework
+   pip install django-anon
    
 Requirements
 ============
