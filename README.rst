@@ -15,6 +15,9 @@
       <a href="https://circleci.com/gh/Tesorio/django-anon">
         <img src="https://circleci.com/gh/Tesorio/django-anon.svg?style=svg&circle-token=373da2a214669014ef040e5a06a7f1a974902daa">
       </a>
+      <a href="https://github.com/Tesorio/django-anon/blob/master/LICENSE.txt">
+        <img src="https://img.shields.io/badge/license-MIT-blue.svg">
+      </a>
     </p>
 
 **django-anon** will help you anonymize your production database so it can be
@@ -158,6 +161,12 @@ out-of-the-box as the below:
 
       class Meta:
          model = Address
+
+
+License
+=======
+
+`MIT <https://github.com/Tesorio/django-anon/blob/master/LICENSE.txt>`_
 
 ----
 
