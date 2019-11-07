@@ -199,7 +199,7 @@ Check out `CONTRIBUTING.rst <https://github.com/Tesorio/django-anon/blob/master/
 License
 =======
 
-`MIT <https://github.com/Tesorio/django-anon/blob/master/LICENSE.txt>`_
+`MIT <https://github.com/Tesorio/django-anon/blob/master/LICENSE>`_
 
 ----
 
