@@ -18,7 +18,7 @@ with open("README.rst") as readme_file:
         out = []
         lines = iter(readme.splitlines(True))
         for line in lines:
-            if line.startswith(".. BANNER"):
+            if line.startswith(".. BANNERSTART"):
                 for line in lines:
                     if line.strip() == ".. BANNEREND":
                         break

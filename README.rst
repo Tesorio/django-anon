@@ -1,4 +1,4 @@
-.. BANNER
+.. BANNERSTART
 .. Since PyPI does not support raw directives, we remove them from the README
 ..
 .. raw directives are only used to make README fancier on GitHub and do not
