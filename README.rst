@@ -42,8 +42,6 @@
 shared among developers, helping to reproduce bugs and make performance improvements
 in a production-like environment.
 
-----
-
 .. image:: https://raw.githubusercontent.com/Tesorio/django-anon/master/django-anon-recording.gif
 
 Features
