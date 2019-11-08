@@ -8,7 +8,25 @@ VERSION = __import__("anon").__version__
 
 
 with open("README.rst") as readme_file:
-    README = readme_file.read()
+
+    def remove_banner(readme):
+        # Since PyPI does not support raw directives, we remove them from the README
+        #
+        # raw directives are only used to make README fancier on GitHub and do not
+        # contain relevant information to be displayed in PyPI, as they are not tied
+        # to the current version, but to the current development status
+        out = []
+        lines = iter(readme.splitlines(keepends=True))
+        for line in lines:
+            if line.startswith(".. BANNER"):
+                for line in lines:
+                    if line.strip() == ".. BANNEREND":
+                        break
+            else:
+                out.append(line)
+        return "".join(out)
+
+    README = remove_banner(readme_file.read())
 
 
 class PublishCommand(Command):
@@ -49,6 +67,7 @@ setup(
     # metadata for upload to PyPI
     description="Anonymize production data so it can be safely used in not-so-safe environments",
     long_description=README,
+    long_description_content_type="text/x-rst",
     author="Tesorio",
     author_email="hello@tesorio.com",
     url="https://github.com/Tesorio/django-anon",
