@@ -16,7 +16,7 @@ with open("README.rst") as readme_file:
         # contain relevant information to be displayed in PyPI, as they are not tied
         # to the current version, but to the current development status
         out = []
-        lines = iter(readme.splitlines(keepends=True))
+        lines = iter(readme.splitlines(True))
         for line in lines:
             if line.startswith(".. BANNER"):
                 for line in lines:
