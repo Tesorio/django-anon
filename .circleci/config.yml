@@ -72,9 +72,9 @@ workflows:
   build-all:
     jobs:
       - py-lint
-      - py27-django18
+      - py27-django18:
           requires: [py-lint]
-      - py27-django111
+      - py27-django111:
           requires: [py-lint]
-      - py36-django2
+      - py36-django2:
           requires: [py-lint]
