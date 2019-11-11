@@ -18,12 +18,7 @@ import_heading_firstparty = 'local'
 lines_after_imports = 2
 atomic = true
 combine_star = true
-exclude = '''
-/(
-    \.git
-  | \.venv([23])?
-)/
-'''
+skip=.git,.venv2,.venv3
 # These settings makes isort compatible with Black:
 # https://github.com/psf/black#how-black-wraps-lines
 multi_line_output = 3
