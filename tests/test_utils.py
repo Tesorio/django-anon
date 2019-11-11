@@ -1,6 +1,5 @@
 # stdlib
 import itertools
-import random
 
 # deps
 from django.test import TestCase
