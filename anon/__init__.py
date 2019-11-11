@@ -1,4 +1,3 @@
-# noqa: F401
 # stdlib
 import sys
 
@@ -6,8 +5,8 @@ import sys
 __version__ = "0.1"
 
 try:
-    from .base import BaseAnonymizer, lazy_attribute
-    from .utils import *
+    from .base import BaseAnonymizer, lazy_attribute  # noqa: F401
+    from .utils import *  # noqa: F401 F403
 
 except ImportError:
     # During setup.py not all dependencies may be installed, which may cause some

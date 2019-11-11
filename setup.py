@@ -1,6 +1,5 @@
 # stdlib
 import os
-import sys
 
 # deps
 from setuptools import Command, find_packages, setup

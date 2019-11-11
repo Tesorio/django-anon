@@ -39,9 +39,9 @@
   rev: 4.3.21
   hooks:
     - id: isort
-      # entry: isort -c --check-only -sp ./.isort.cfg
-      entry: isort
+      entry: isort --check-only
       language_version: python3
+      additional_dependencies: ["toml"]
 
       # Anytime the exclude rules below change, we also need to update the .isort.cfg
       # file to reflect the changes. This is because isort will not respect this rules
