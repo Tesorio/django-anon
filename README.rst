@@ -32,8 +32,16 @@
     </p>
     
     <p align="center">
-      <a href="https://django-anon.readthedocs.io/en/latest/">
+      <a href="#installation">
+        Install
+      </a>
+      |
+      <a href="https://django-anon.readthedocs.io/en/latest/introduction.html#table-of-contents">
         Read Documentation
+      </a>
+      |
+      <a href="https://github.com/Tesorio/django-anon/blob/master/CONTRIBUTING.rst">
+        Contribute
       </a>
     </p>
 .. BANNEREND
