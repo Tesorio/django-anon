@@ -1,9 +1,14 @@
 #!/usr/bin/env python
 # Recommended approach by Django:
 # https://docs.djangoproject.com/en/2.2/topics/testing/advanced/#using-the-django-test-runner-to-test-reusable-applications
+
+# stdlib
 import os
 import sys
+
+# deps
 import django
+
 
 if __name__ == "__main__":
     os.environ["DJANGO_SETTINGS_MODULE"] = "tests.settings"

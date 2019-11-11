@@ -3,8 +3,8 @@ from collections import OrderedDict
 from logging import getLogger
 
 # deps
-from django_bulk_update.helper import bulk_update
 from chunkator import chunkator_page
+from django_bulk_update.helper import bulk_update
 
 
 logger = getLogger(__name__)
@@ -18,6 +18,7 @@ class OrderedDeclaration(object):
         Idea taken from: https://stackoverflow.com/a/4460034/639465
         Also inspired by https://github.com/FactoryBoy/factory_boy
     """
+
     global_counter = 0
 
     def __init__(self):
@@ -52,26 +53,28 @@ class BaseAnonymizer(object):
         queryset = self.get_queryset()
         update_fields = list(self.get_declarations().keys())
         update_batch_size = bulk_update_kwargs.pop(
-            'batch_size', self._meta.update_batch_size)
+            "batch_size", self._meta.update_batch_size
+        )
 
         if select_chunk_size is None:
             select_chunk_size = self._meta.select_chunk_size
 
         if update_batch_size > select_chunk_size:
             raise ValueError(
-                'update_batch_size ({}) should not be higher than '
-                'select_chunk_size ({})'
-                .format(update_batch_size, select_chunk_size))
+                "update_batch_size ({}) should not be higher than "
+                "select_chunk_size ({})".format(update_batch_size, select_chunk_size)
+            )
 
         # info used in log messages
         model_name = self._meta.model.__name__
         current_batch = 0
 
         for page in chunkator_page(queryset, chunk_size=select_chunk_size):
-            logger.info('Updating {}... {}-{}'.format(
-                model_name,
-                current_batch,
-                current_batch + select_chunk_size))
+            logger.info(
+                "Updating {}... {}-{}".format(
+                    model_name, current_batch, current_batch + select_chunk_size
+                )
+            )
             current_batch += select_chunk_size
 
             objs = []
@@ -79,27 +82,34 @@ class BaseAnonymizer(object):
                 self.patch_object(obj)
                 objs.append(obj)
 
-            bulk_update(objs, **dict(update_fields=update_fields,
-                                     batch_size=update_batch_size,
-                                     **bulk_update_kwargs))
+            bulk_update(
+                objs,
+                **dict(
+                    update_fields=update_fields,
+                    batch_size=update_batch_size,
+                    **bulk_update_kwargs
+                )
+            )
 
         if current_batch == 0:
-            logger.info('{} has no records'.format(model_name))
+            logger.info("{} has no records".format(model_name))
 
     def get_meta(self):
         meta = self.Meta()
-        if not hasattr(meta, 'select_chunk_size'):
+        if not hasattr(meta, "select_chunk_size"):
             # Chunk size to iterate over
             meta.select_chunk_size = 1000
-        if not hasattr(meta, 'update_batch_size'):
+        if not hasattr(meta, "update_batch_size"):
             # Batch size for bulk updates
             meta.update_batch_size = 50
         return meta
+
     _meta = property(get_meta)
 
     def get_manager(self):
         meta = self._meta
-        return getattr(meta, 'manager', meta.model.objects)
+        return getattr(meta, "manager", meta.model.objects)
+
     _manager = property(get_manager)
 
     def get_queryset(self):
@@ -138,6 +148,7 @@ class BaseAnonymizer(object):
             will come first, as they are considered "raw" values and should
             not be affected by the order of other non-ordered declarations
         """
+
         def _sort_declaration(declaration):
             name, value = declaration
             if isinstance(value, OrderedDeclaration):
@@ -155,8 +166,10 @@ class BaseAnonymizer(object):
         """ Return list of class attributes, which also includes methods and
             subclasses, ignoring any magic methods and reserved attributes
         """
-        reserved_names = ['Meta', 'clean']
+        reserved_names = ["Meta", "clean"]
 
-        return {name: self.__class__.__dict__[name]
-                for name, value in self.__class__.__dict__.items()
-                if not name.startswith('__') and name not in reserved_names}
+        return {
+            name: self.__class__.__dict__[name]
+            for name, value in self.__class__.__dict__.items()
+            if not name.startswith("__") and name not in reserved_names
+        }

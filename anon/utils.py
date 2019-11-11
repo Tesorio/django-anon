@@ -4,34 +4,188 @@ import random
 
 
 _WORD_LIST = [
-    'a', 'ab', 'accusamus', 'accusantium', 'ad', 'adipisci', 'alias',
-    'aliquam', 'aliquid', 'amet', 'animi', 'aperiam', 'architecto',
-    'asperiores', 'aspernatur', 'assumenda', 'at', 'atque', 'aut', 'autem',
-    'beatae', 'blanditiis', 'commodi', 'consectetur', 'consequatur',
-    'consequuntur', 'corporis', 'corrupti', 'culpa', 'cum', 'cumque',
-    'cupiditate', 'debitis', 'delectus', 'deleniti', 'deserunt', 'dicta',
-    'dignissimos', 'distinctio', 'dolor', 'dolore', 'dolorem', 'doloremque',
-    'dolores', 'doloribus', 'dolorum', 'ducimus', 'ea', 'eaque', 'earum',
-    'eius', 'eligendi', 'enim', 'eos', 'error', 'esse', 'est', 'et', 'eum',
-    'eveniet', 'ex', 'excepturi', 'exercitationem', 'expedita', 'explicabo',
-    'facere', 'facilis', 'fuga', 'fugiat', 'fugit', 'harum', 'hic', 'id',
-    'illo', 'illum', 'impedit', 'in', 'incidunt', 'inventore', 'ipsa',
-    'ipsam', 'ipsum', 'iste', 'itaque', 'iure', 'iusto', 'labore',
-    'laboriosam', 'laborum', 'laudantium', 'libero', 'magnam', 'magni',
-    'maiores', 'maxime', 'minima', 'minus', 'modi', 'molestiae',
-    'molestias', 'mollitia', 'nam', 'natus', 'necessitatibus', 'nemo',
-    'neque', 'nesciunt', 'nihil', 'nisi', 'nobis', 'non', 'nostrum',
-    'nulla', 'numquam', 'occaecati', 'odio', 'odit', 'officia', 'officiis',
-    'omnis', 'optio', 'pariatur', 'perferendis', 'perspiciatis', 'placeat',
-    'porro', 'possimus', 'praesentium', 'provident', 'quae', 'quaerat',
-    'quam', 'quas', 'quasi', 'qui', 'quia', 'quibusdam', 'quidem', 'quis',
-    'quisquam', 'quo', 'quod', 'quos', 'ratione', 'recusandae',
-    'reiciendis', 'rem', 'repellat', 'repellendus', 'reprehenderit',
-    'repudiandae', 'rerum', 'saepe', 'sapiente', 'sed', 'sequi',
-    'similique', 'sint', 'sit', 'soluta', 'sunt', 'suscipit', 'tempora',
-    'tempore', 'temporibus', 'tenetur', 'totam', 'ullam', 'unde', 'ut',
-    'vel', 'velit', 'veniam', 'veritatis', 'vero', 'vitae', 'voluptas',
-    'voluptate', 'voluptatem', 'voluptates', 'voluptatibus', 'voluptatum'
+    "a",
+    "ab",
+    "accusamus",
+    "accusantium",
+    "ad",
+    "adipisci",
+    "alias",
+    "aliquam",
+    "aliquid",
+    "amet",
+    "animi",
+    "aperiam",
+    "architecto",
+    "asperiores",
+    "aspernatur",
+    "assumenda",
+    "at",
+    "atque",
+    "aut",
+    "autem",
+    "beatae",
+    "blanditiis",
+    "commodi",
+    "consectetur",
+    "consequatur",
+    "consequuntur",
+    "corporis",
+    "corrupti",
+    "culpa",
+    "cum",
+    "cumque",
+    "cupiditate",
+    "debitis",
+    "delectus",
+    "deleniti",
+    "deserunt",
+    "dicta",
+    "dignissimos",
+    "distinctio",
+    "dolor",
+    "dolore",
+    "dolorem",
+    "doloremque",
+    "dolores",
+    "doloribus",
+    "dolorum",
+    "ducimus",
+    "ea",
+    "eaque",
+    "earum",
+    "eius",
+    "eligendi",
+    "enim",
+    "eos",
+    "error",
+    "esse",
+    "est",
+    "et",
+    "eum",
+    "eveniet",
+    "ex",
+    "excepturi",
+    "exercitationem",
+    "expedita",
+    "explicabo",
+    "facere",
+    "facilis",
+    "fuga",
+    "fugiat",
+    "fugit",
+    "harum",
+    "hic",
+    "id",
+    "illo",
+    "illum",
+    "impedit",
+    "in",
+    "incidunt",
+    "inventore",
+    "ipsa",
+    "ipsam",
+    "ipsum",
+    "iste",
+    "itaque",
+    "iure",
+    "iusto",
+    "labore",
+    "laboriosam",
+    "laborum",
+    "laudantium",
+    "libero",
+    "magnam",
+    "magni",
+    "maiores",
+    "maxime",
+    "minima",
+    "minus",
+    "modi",
+    "molestiae",
+    "molestias",
+    "mollitia",
+    "nam",
+    "natus",
+    "necessitatibus",
+    "nemo",
+    "neque",
+    "nesciunt",
+    "nihil",
+    "nisi",
+    "nobis",
+    "non",
+    "nostrum",
+    "nulla",
+    "numquam",
+    "occaecati",
+    "odio",
+    "odit",
+    "officia",
+    "officiis",
+    "omnis",
+    "optio",
+    "pariatur",
+    "perferendis",
+    "perspiciatis",
+    "placeat",
+    "porro",
+    "possimus",
+    "praesentium",
+    "provident",
+    "quae",
+    "quaerat",
+    "quam",
+    "quas",
+    "quasi",
+    "qui",
+    "quia",
+    "quibusdam",
+    "quidem",
+    "quis",
+    "quisquam",
+    "quo",
+    "quod",
+    "quos",
+    "ratione",
+    "recusandae",
+    "reiciendis",
+    "rem",
+    "repellat",
+    "repellendus",
+    "reprehenderit",
+    "repudiandae",
+    "rerum",
+    "saepe",
+    "sapiente",
+    "sed",
+    "sequi",
+    "similique",
+    "sint",
+    "sit",
+    "soluta",
+    "sunt",
+    "suscipit",
+    "tempora",
+    "tempore",
+    "temporibus",
+    "tenetur",
+    "totam",
+    "ullam",
+    "unde",
+    "ut",
+    "vel",
+    "velit",
+    "veniam",
+    "veritatis",
+    "vero",
+    "vitae",
+    "voluptas",
+    "voluptate",
+    "voluptatem",
+    "voluptates",
+    "voluptatibus",
+    "voluptatum",
 ]
 
 
@@ -44,7 +198,7 @@ _min_word_size = len(sorted(_WORD_LIST, key=lambda w: len(w))[0])
 
 # The number_generatator holds a generator that each iteration returns a
 # different number
-_number_generator = itertools.cycle('86306894249026785203141')
+_number_generator = itertools.cycle("86306894249026785203141")
 
 
 def fake_word(min_size=_min_word_size, max_size=20):
@@ -55,14 +209,14 @@ def fake_word(min_size=_min_word_size, max_size=20):
 
     """
     if min_size < _min_word_size:
-        raise ValueError('no such word with this size < min_size')
+        raise ValueError("no such word with this size < min_size")
 
     for word in _word_generator:
         if min_size <= len(word) <= max_size:
             return word
 
 
-def fake_text(max_size=255, max_diff_allowed=5, separator=' '):
+def fake_text(max_size=255, max_diff_allowed=5, separator=" "):
     """ Return fake text
 
     :max_size: Maximum number of chars
@@ -71,7 +225,7 @@ def fake_text(max_size=255, max_diff_allowed=5, separator=' '):
 
     """
     if max_diff_allowed < 1:
-        raise ValueError('max_diff_allowed must be > 0')
+        raise ValueError("max_diff_allowed must be > 0")
 
     fake_size = 0
     fake_words = []
@@ -110,7 +264,7 @@ def fake_name(max_size=15):
     return fake_text(max_size=max_size).title()
 
 
-def fake_username(max_size=10, separator='', rand_range=(1000, 999999)):
+def fake_username(max_size=10, separator="", rand_range=(1000, 999999)):
     """ Returns fake username
 
     :max_size: Maximum number of chars
@@ -120,21 +274,22 @@ def fake_username(max_size=10, separator='', rand_range=(1000, 999999)):
     """
     rand_start, rand_end = rand_range
     if not rand_end > rand_start:
-        raise ValueError('rand_range start ({}) must be > end ({})'
-                         .format(rand_start, rand_end))
+        raise ValueError(
+            "rand_range start ({}) must be > end ({})".format(rand_start, rand_end)
+        )
 
     random_number = str(random.randint(rand_start, rand_end))
     min_size_allowed = _min_word_size + len(random_number)
 
     if max_size < min_size_allowed:
-        raise ValueError('username must be >= {}'.format(min_size_allowed))
+        raise ValueError("username must be >= {}".format(min_size_allowed))
     else:
         max_size -= len(random_number)
 
     return fake_text(max_size, separator=separator) + random_number
 
 
-def fake_email(max_size=25, suffix='@example.com'):
+def fake_email(max_size=25, suffix="@example.com"):
     """ Returns fake email address
 
     :max_size: Maximum number of chars
@@ -145,16 +300,16 @@ def fake_email(max_size=25, suffix='@example.com'):
 
     if max_size + len(suffix) > 254:
         # an email address must not exceed 254 chars
-        raise ValueError('email address must not exceed 254 chars')
+        raise ValueError("email address must not exceed 254 chars")
     elif max_size < min_size_allowed:
-        raise ValueError('max_size must be >= {}' .format(min_size_allowed))
+        raise ValueError("max_size must be >= {}".format(min_size_allowed))
     else:
         max_size -= len(suffix)
 
-    return fake_username(max_size, separator='.') + suffix
+    return fake_username(max_size, separator=".") + suffix
 
 
-def fake_url(max_size=50, scheme='http://', suffix='.com'):
+def fake_url(max_size=50, scheme="http://", suffix=".com"):
     """ Returns fake URL
 
     :max_size: Maximum number of chars
@@ -165,15 +320,15 @@ def fake_url(max_size=50, scheme='http://', suffix='.com'):
     min_size_allowed = _min_word_size + len(scheme) + len(suffix)
 
     if max_size < min_size_allowed:
-        raise ValueError('max_size must be >= {}' .format(min_size_allowed))
+        raise ValueError("max_size must be >= {}".format(min_size_allowed))
     else:
         max_size -= len(scheme) + len(suffix)
 
-    domain = fake_text(max_size=max_size, separator='.') + suffix
+    domain = fake_text(max_size=max_size, separator=".") + suffix
     return scheme + domain
 
 
-def fake_phone_number(format='999-999-9999'):
+def fake_phone_number(format="999-999-9999"):
     """ Returns a fake phone number in the desired format
 
     :format: Format of phone number to generate
@@ -181,13 +336,13 @@ def fake_phone_number(format='999-999-9999'):
     """
     number = []
     for char in format:
-        if char == '9':
+        if char == "9":
             n = next(_number_generator)
             if not number:
                 # do not start phone numbers with zero
-                while n == '0':
+                while n == "0":
                     n = next(_number_generator)
             number.append(n)
         else:
             number.append(char)
-    return ''.join(number)
+    return "".join(number)

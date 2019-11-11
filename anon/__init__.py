@@ -1,5 +1,7 @@
 # noqa: F401
+# stdlib
 import sys
+
 
 __version__ = "0.1"
 
@@ -22,5 +24,5 @@ except ImportError:
     # >>> from anon.base import BaseAnonymizer
     # >>> BaseAnonymizer
     #
-    if not sys.argv[0].endswith('setup.py'):
+    if not sys.argv[0].endswith("setup.py"):
         raise
