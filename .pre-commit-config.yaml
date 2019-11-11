@@ -1,0 +1,51 @@
+- repo: git://github.com/pre-commit/pre-commit-hooks
+  sha: v0.9.2
+  hooks:
+    - id: check-added-large-files
+      args: ['--maxkb=500']
+    - id: check-byte-order-marker
+    - id: check-case-conflict
+    - id: check-merge-conflict
+    - id: check-symlinks
+    - id: debug-statements
+      language_version: python2.7
+    - id: detect-private-key
+
+- repo: https://github.com/psf/black
+  sha: 19.10b0
+  hooks:
+    - id: black
+      language_version: python3
+
+      # We run black w/ --fast here but CI runs it with --safe
+      entry: black --fast --check
+
+      # Anytime the exclude rules below change, we also need to update the
+      # pyproject.toml file to reflect the changes. This is because Black will not
+      # respect this rules when running through pre-commit hook, because the pre-commit
+      # hook passes filenames to black, which causes black to ignore any other
+      # checks/exclusions.
+      #
+      # More info here: https://github.com/psf/black/issues/438
+      exclude: \.git
+
+- repo: https://gitlab.com/pycqa/flake8
+  rev: 3.7.8
+  hooks:
+    - id: flake8
+      language_version: python2
+
+- repo: https://github.com/timothycrosley/isort
+  rev: 4.3.21
+  hooks:
+    - id: isort
+      entry: isort --check-only
+      language_version: python3
+      additional_dependencies: ["toml"]
+
+      # Anytime the exclude rules below change, we also need to update the .isort.cfg
+      # file to reflect the changes. This is because isort will not respect this rules
+      # when running through pre-commit hook, because the pre-commit hook passes
+      # filenames to isort, which causes isort to ignore any other checks/exclusions.
+      #
+      exclude: \.git

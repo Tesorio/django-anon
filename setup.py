@@ -1,6 +1,8 @@
+# stdlib
 import os
-import sys
-from setuptools import setup, find_packages, Command
+
+# deps
+from setuptools import Command, find_packages, setup
 
 
 # Dynamically calculate the version based on anon.VERSION

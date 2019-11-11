@@ -1,6 +1,6 @@
 try:
     # stdlib
-    from unittest import mock
+    from unittest import mock  # noqa: F401
 except ImportError:
     # deps
-    import mock
+    import mock  # noqa: F401

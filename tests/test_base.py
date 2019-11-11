@@ -1,10 +1,9 @@
-# django
+# deps
 from django.test import TestCase
 
-# first party
+# local
 from anon import BaseAnonymizer, lazy_attribute
 
-# local
 from .compat import mock
 
 
@@ -47,7 +46,7 @@ class BaseTestCase(TestCase):
         m.objects.all.assert_called_once()
 
     def test_patch_object(self):
-        fake_first_name = lambda: 'foo'  # noqa: E731
+        fake_first_name = lambda: "foo"  # noqa: E731
 
         class Anon(BaseAnonymizer):
             first_name = fake_first_name
@@ -55,30 +54,30 @@ class BaseTestCase(TestCase):
             raw_data = {1: 2}
 
         class Obj(object):
-            first_name = 'zzz'
-            last_name = ''  # empty data should be kept empty
+            first_name = "zzz"
+            last_name = ""  # empty data should be kept empty
             raw_data = {}
 
         obj = Obj()
 
         anonymizer = Anon()
         anonymizer.patch_object(obj)
-        self.assertEqual(obj.first_name, 'foo')
-        self.assertEqual(obj.last_name, '')
+        self.assertEqual(obj.first_name, "foo")
+        self.assertEqual(obj.last_name, "")
         self.assertEqual(obj.raw_data, {})
 
-    @mock.patch('anon.base.bulk_update')
-    @mock.patch('anon.base.chunkator_page')
+    @mock.patch("anon.base.bulk_update")
+    @mock.patch("anon.base.chunkator_page")
     def test_run(self, chunkator_page, bulk_update):
         class Anon(BaseAnonymizer):
             class Meta:
-                model = mock.Mock(__name__='x')
+                model = mock.Mock(__name__="x")
                 update_batch_size = 42
 
-            first_name = 'xyz'
+            first_name = "xyz"
 
         class Obj(object):
-            first_name = 'zzz'
+            first_name = "zzz"
 
         obj = Obj()
 
@@ -90,8 +89,9 @@ class BaseTestCase(TestCase):
         anonymizer.run()
 
         anonymizer.patch_object.assert_called_once_with(obj)
-        bulk_update.assert_called_once_with([obj], batch_size=42,
-                                            update_fields=['first_name'])
+        bulk_update.assert_called_once_with(
+            [obj], batch_size=42, update_fields=["first_name"]
+        )
 
     def test_lazy_attribute(self):
         lazy_fn = mock.Mock()
@@ -101,7 +101,7 @@ class BaseTestCase(TestCase):
             first_name = fake_first_name
 
         class Obj(object):
-            first_name = 'zzz'
+            first_name = "zzz"
 
         obj = Obj()
 
@@ -118,7 +118,7 @@ class BaseTestCase(TestCase):
                 return lazy_fn(self)
 
         class Obj(object):
-            first_name = 'zzz'
+            first_name = "zzz"
 
         obj = Obj()
 
@@ -131,7 +131,7 @@ class BaseTestCase(TestCase):
             raw_data = {}
 
         class Obj(object):
-            raw_data = {'password': 'xyz'}
+            raw_data = {"password": "xyz"}
 
         obj = Obj()
 
@@ -141,26 +141,26 @@ class BaseTestCase(TestCase):
 
     def test_clean(self):
         class Anon(BaseAnonymizer):
-            line1 = ''
-            line2 = ''
-            line3 = ''
+            line1 = ""
+            line2 = ""
+            line3 = ""
 
             def clean(self, obj):
-                obj.line1 = 'foo'
-                obj.line2 = 'bar'
+                obj.line1 = "foo"
+                obj.line2 = "bar"
 
         class Obj(object):
-            line1 = 'X'
-            line2 = 'Y'
-            line3 = 'Z'
+            line1 = "X"
+            line2 = "Y"
+            line3 = "Z"
 
         obj = Obj()
 
         anonymizer = Anon()
         anonymizer.patch_object(obj)
-        self.assertEqual(obj.line1, 'foo')
-        self.assertEqual(obj.line2, 'bar')
-        self.assertEqual(obj.line3, '')
+        self.assertEqual(obj.line1, "foo")
+        self.assertEqual(obj.line2, "bar")
+        self.assertEqual(obj.line3, "")
 
     def test_get_declarations(self):
         # Ensure the order is preserved
@@ -170,4 +170,4 @@ class BaseTestCase(TestCase):
             b = lazy_attribute(lambda o: 5)
 
         anonymizer = Anon()
-        self.assertEqual(list(anonymizer.get_declarations().keys()), ['a', 'c', 'b'])
+        self.assertEqual(list(anonymizer.get_declarations().keys()), ["a", "c", "b"])

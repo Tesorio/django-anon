@@ -1,0 +1,28 @@
+[tool.black]
+target-version = ['py27']
+exclude = '''
+/(
+    \.git
+  | \.venv([23])?
+)/
+'''
+
+[tool.isort]
+known_django = 'django'
+known_first_party = ['anon']
+sections = ['FUTURE', 'STDLIB', 'THIRDPARTY', 'FIRSTPARTY', 'LOCALFOLDER']
+default_section = 'THIRDPARTY'
+import_heading_stdlib = 'stdlib'
+import_heading_thirdparty = 'deps'
+import_heading_firstparty = 'local'
+lines_after_imports = 2
+atomic = true
+combine_star = true
+skip = ['.git', '.venv2', '.venv3']
+# These settings makes isort compatible with Black:
+# https://github.com/psf/black#how-black-wraps-lines
+multi_line_output = 3
+include_trailing_comma = true
+force_grid_wrap = false
+use_parentheses = true
+line_length = 88

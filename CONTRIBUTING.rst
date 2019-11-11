@@ -50,6 +50,20 @@ To start developing on **django-anon**, clone the repo:
 Changes should broadly follow the PEP 8 style conventions, and we recommend you set up your editor to automatically indicate non-conforming styles.
 
 
+Coding Style
+============
+
+`The Black code style <https://github.com/psf/black#the-black-code-style>`_ is used across the whole codebase. Ideally, you should configure your editor to auto format the code. This means you can use **88 characters per line**, rather than 79 as defined by PEP 8.
+
+Use `isort` to automate import sorting using the guidelines below:
+
+* Put imports in these groups: future, stdlib, deps, local
+* Sort lines in each group alphabetically by the full module name
+* On each line, alphabetize the items with the upper case items grouped before the lowercase items
+
+Don't be afraid, all specifications for linters are defined in ``pyproject.toml`` and ``.flake8``
+
+
 Testing
 =======
 
@@ -65,7 +79,7 @@ To run the tests, clone the repository, and then:
 
    # Run the tests
    ./runtests.py
-   
+
 
 Running against multiple environments
 =====================================
@@ -75,6 +89,16 @@ You can also use the excellent tox testing tool to run the tests against all sup
 .. code::
 
    tox
+
+
+Using pre-commit hook
+=====================
+
+CI will perform some checks during the build, but to save time, most of the checks can be ran locally beforing pushing code. To do this, we use `pre-commit <https://pre-commit.com/#install>`_ hooks. All you need to do, is to install and configure pre-commit:
+
+.. code:: bash
+
+   pre-commit install --hook-type pre-push -f
 
 
 Pull requests
