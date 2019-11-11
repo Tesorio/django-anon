@@ -1,3 +1,9 @@
+.. BANNERSTART
+.. Since PyPI does not support raw directives, we remove them from the README
+..
+.. raw directives are only used to make README fancier on GitHub and do not
+.. contain relevant information to be displayed in PyPI, as they are not tied
+.. to the current version, but to the current development status
 .. raw:: html
 
     <p align="center">
@@ -30,6 +36,7 @@
         Read Documentation
       </a>
     </p>
+.. BANNEREND
 
 **django-anon** will help you anonymize your production database so it can be
 shared among developers, helping to reproduce bugs and make performance improvements
