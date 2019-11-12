@@ -29,6 +29,9 @@
       <a href="https://github.com/Tesorio/django-anon/blob/master/LICENSE.txt">
         <img src="https://img.shields.io/badge/license-MIT-blue.svg">
       </a>
+      <a href="https://pypi.org/project/django-anon/">
+        <img src="https://img.shields.io/pypi/v/django-anon.svg?color=blue">
+      </a>
     </p>
     
     <p align="center">
@@ -38,6 +41,10 @@
       |
       <a href="https://django-anon.readthedocs.io/en/latest/introduction.html#table-of-contents">
         Read Documentation
+      </a>
+      |
+      <a href="https://circleci.com/gh/Tesorio/django-anon">
+        PyPI
       </a>
       |
       <a href="https://github.com/Tesorio/django-anon/blob/master/CONTRIBUTING.rst">
