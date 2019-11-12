@@ -43,7 +43,7 @@
         Read Documentation
       </a>
       |
-      <a href="https://circleci.com/gh/Tesorio/django-anon">
+      <a href="https://pypi.org/project/django-anon/">
         PyPI
       </a>
       |
