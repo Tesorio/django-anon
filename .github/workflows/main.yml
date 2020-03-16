@@ -1,0 +1,23 @@
+name: CI
+on: [push, pull_request]
+jobs:
+  flake8:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-python@v1.1.1
+      - uses: actions/checkout@v1
+
+      - run: pip install coverage2clover coverage
+
+      - run: python setup.py install
+      - run: coverage run runtests.py
+      - run: coverage xml
+      - run: coverage2clover < coverage.xml > clover.xml
+
+      - name: Coverage monitor
+        uses: slavcodev/coverage-monitor-action@1.0.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          clover_file: "clover.xml"
+          threshold_alert: 10
+          threshold_warning: 50
