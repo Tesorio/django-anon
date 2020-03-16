@@ -17,6 +17,6 @@ jobs:
       - name: Coverage monitor
         uses: 5monkeys/cobertura-action@master
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
           path: coverage.xml
           minimum_coverage: 94
