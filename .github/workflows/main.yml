@@ -1,7 +1,7 @@
 name: CI
 on: [pull_request]
 jobs:
-  build:
+  coverage:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/setup-python@v1.1.1
@@ -15,9 +15,8 @@ jobs:
       - run: coverage2clover < coverage.xml > clover.xml
 
       - name: Coverage monitor
-        uses: slavcodev/coverage-monitor-action@1.0.0
+        uses: 5monkeys/cobertura-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          clover_file: "clover.xml"
-          threshold_alert: 10
-          threshold_warning: 50
+          path: coverage.xml
+          minimum_coverage: 94
