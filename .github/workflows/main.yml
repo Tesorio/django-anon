@@ -7,16 +7,15 @@ jobs:
       - uses: actions/setup-python@v1.1.1
       - uses: actions/checkout@v1
 
-      - run: pip install coverage2clover coverage
+      - run: pip install coverage
 
       - run: python setup.py install
       - run: coverage run runtests.py
       - run: coverage xml
-      - run: coverage2clover < coverage.xml > clover.xml
 
       - name: Coverage monitor
         uses: 5monkeys/cobertura-action@master
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           path: coverage.xml
-          minimum_coverage: 94
+          minimum_coverage: 50
