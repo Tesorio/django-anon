@@ -1,0 +1,21 @@
+name: CI
+on: [pull_request]
+jobs:
+  coverage:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-python@v1.1.1
+      - uses: actions/checkout@v1
+
+      - run: pip install coverage
+
+      - run: python setup.py install
+      - run: coverage run runtests.py
+      - run: coverage xml
+
+      - name: Coverage monitor
+        uses: 5monkeys/cobertura-action@master
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          path: coverage.xml
+          minimum_coverage: 50
