@@ -81,11 +81,11 @@ Installation
 
    pip install django-anon
    
-Requirements
-============
+Versions we have tested against
+===============================
 
-* Python (2.7, 3.6)
-* Django (1.8, 1.11, 2.2)
+* Python (2.7, 3.7)
+* Django (1.8, 1.11, 2.2, 3.0)
 
 Usage
 =====

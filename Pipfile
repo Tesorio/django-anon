@@ -7,6 +7,7 @@ verify_ssl = true
 sphinx = "*"
 sphinx-rtd-theme = "*"
 sphinx-autobuild = "*"
+tox = "*"
 
 [packages]
 django-bulk-update = "*"
