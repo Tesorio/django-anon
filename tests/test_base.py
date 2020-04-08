@@ -2,9 +2,22 @@
 from django.test import TestCase
 
 # local
-from anon import BaseAnonymizer, lazy_attribute
+import anon
 
 from .compat import mock
+
+
+class BaseAnonymizer(anon.BaseAnonymizer):
+    class Meta:
+        pass
+
+    def __init__(self):
+        """
+        The reason we set declarations manually in ``__init__`` is because we want to
+        patch objects individually for unit testing purposes, without using the
+        ``run()`` method. In general cases, declarations will be set by ``run()``
+        """
+        self._declarations = self.get_declarations()
 
 
 class BaseTestCase(TestCase):
@@ -54,9 +67,10 @@ class BaseTestCase(TestCase):
             raw_data = {1: 2}
 
         class Obj(object):
-            first_name = "zzz"
-            last_name = ""  # empty data should be kept empty
-            raw_data = {}
+            def __init__(self):
+                self.first_name = "zzz"
+                self.last_name = ""  # empty data should be kept empty
+                self.raw_data = {}
 
         obj = Obj()
 
@@ -77,7 +91,8 @@ class BaseTestCase(TestCase):
             first_name = "xyz"
 
         class Obj(object):
-            first_name = "zzz"
+            def __init__(self):
+                self.first_name = "zzz"
 
         obj = Obj()
 
@@ -95,13 +110,14 @@ class BaseTestCase(TestCase):
 
     def test_lazy_attribute(self):
         lazy_fn = mock.Mock()
-        fake_first_name = lazy_attribute(lazy_fn)
+        fake_first_name = anon.lazy_attribute(lazy_fn)
 
         class Anon(BaseAnonymizer):
             first_name = fake_first_name
 
         class Obj(object):
-            first_name = "zzz"
+            def __init__(self):
+                self.first_name = "zzz"
 
         obj = Obj()
 
@@ -113,12 +129,13 @@ class BaseTestCase(TestCase):
         lazy_fn = mock.Mock()
 
         class Anon(BaseAnonymizer):
-            @lazy_attribute
+            @anon.lazy_attribute
             def first_name(self):
                 return lazy_fn(self)
 
         class Obj(object):
-            first_name = "zzz"
+            def __init__(self):
+                self.first_name = "zzz"
 
         obj = Obj()
 
@@ -131,7 +148,8 @@ class BaseTestCase(TestCase):
             raw_data = {}
 
         class Obj(object):
-            raw_data = {"password": "xyz"}
+            def __init__(self):
+                self.raw_data = {"password": "xyz"}
 
         obj = Obj()
 
@@ -150,9 +168,10 @@ class BaseTestCase(TestCase):
                 obj.line2 = "bar"
 
         class Obj(object):
-            line1 = "X"
-            line2 = "Y"
-            line3 = "Z"
+            def __init__(self):
+                self.line1 = "X"
+                self.line2 = "Y"
+                self.line3 = "Z"
 
         obj = Obj()
 
@@ -165,9 +184,9 @@ class BaseTestCase(TestCase):
     def test_get_declarations(self):
         # Ensure the order is preserved
         class Anon(BaseAnonymizer):
-            a = lazy_attribute(lambda o: 4)
-            c = lazy_attribute(lambda o: 6)
-            b = lazy_attribute(lambda o: 5)
+            a = anon.lazy_attribute(lambda o: 4)
+            c = anon.lazy_attribute(lambda o: 6)
+            b = anon.lazy_attribute(lambda o: 5)
 
         anonymizer = Anon()
         self.assertEqual(list(anonymizer.get_declarations().keys()), ["a", "c", "b"])
