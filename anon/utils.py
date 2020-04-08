@@ -188,6 +188,8 @@ _WORD_LIST = [
     "voluptatum",
 ]
 
+# The _avg_word_size holds the average size of word sample
+_avg_word_size = sum(map(len, _WORD_LIST)) / len(_WORD_LIST)
 
 # The _word_generator holds a generator that each iteration returns a
 # different word
@@ -227,23 +229,14 @@ def fake_text(max_size=255, max_diff_allowed=5, separator=" "):
     if max_diff_allowed < 1:
         raise ValueError("max_diff_allowed must be > 0")
 
-    fake_size = 0
-    fake_words = []
+    num_words = int(max_size / _avg_word_size)
+    words = itertools.islice(_word_generator, num_words)
 
-    separator_size = len(separator)
+    text = separator.join(words)
+    while len(text) > max_size:
+        text = text[: text.rindex(separator)]
 
-    while fake_size < max_size:
-        word = next(_word_generator)
-        sep = separator_size if fake_size > 0 else 0
-        new_size = fake_size + len(word) + sep
-        if new_size > max_size:
-            if (max_size - fake_size) < max_diff_allowed:
-                break
-        else:
-            fake_words.append(word)
-            fake_size = new_size
-
-    return separator.join(fake_words)
+    return text
 
 
 def fake_small_text(max_size=50):

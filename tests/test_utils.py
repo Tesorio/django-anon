@@ -1,5 +1,5 @@
 # stdlib
-import itertools
+import re
 
 # deps
 from django.test import TestCase
@@ -7,54 +7,38 @@ from django.test import TestCase
 # local
 from anon import utils
 
-from .compat import mock
-
 
 class UtilsTestCase(TestCase):
-    def setUp(self):
-        utils._word_generator = itertools.cycle(utils._WORD_LIST)
-        utils._number_generator = itertools.cycle("123456789")
-
     def test_fake_word(self):
         text = utils.fake_word(min_size=6)
-        expected = "accusamus"
-        self.assertEqual(text, expected)
+        self.assertGreaterEqual(len(text), 6)
 
     def test_fake_text(self):
         text = utils.fake_text(40)
-        expected = "a ab accusamus accusantium ad adipisci"
-        self.assertEqual(text, expected)
+        self.assertLessEqual(len(text), 40)
 
     def test_fake_text_separator(self):
         text = utils.fake_text(40, separator="...")
-        expected = "a...ab...accusamus...accusantium...ad"
-        self.assertEqual(text, expected)
+        self.assertIn("...", text)
 
     def test_fake_name(self):
         text = utils.fake_name(15)
-        expected = "A Ab Accusamus"
-        self.assertEqual(text, expected)
+        self.assertLessEqual(len(text), 15)
 
-    @mock.patch("random.randint")
-    def test_fake_username(self, mock_randint):
-        mock_randint.return_value = 135229
-        text = utils.fake_username(15, separator="_")
-        expected = "a_ab_ad135229"
-        self.assertEqual(text, expected)
+    def test_fake_username(self):
+        text = utils.fake_username(45, separator="_")
+        self.assertIn("_", text)
 
-    @mock.patch("random.randint")
-    def test_fake_email(self, mock_randint):
-        mock_randint.return_value = 135229
+    def test_fake_email(self):
         text = utils.fake_email(20)
-        expected = "a135229@example.com"
-        self.assertEqual(text, expected)
+        self.assertLessEqual(len(text), 20)
 
     def test_fake_url(self):
         text = utils.fake_url(30, scheme="https://", suffix=".com.br")
-        expected = "https://a.ab.accusamus.com.br"
-        self.assertEqual(text, expected)
+        self.assertLessEqual(len(text), 30)
+        self.assertTrue(text.startswith("https://"))
+        self.assertIn(".com.br", text)
 
     def test_fake_phone_number(self):
         text = utils.fake_phone_number(format="(99) 9999-9999")
-        expected = "(12) 3456-7891"
-        self.assertEqual(text, expected)
+        self.assertTrue(bool(re.match(r"^\(\d{2}\) \d{4}-\d{4}$", text)))

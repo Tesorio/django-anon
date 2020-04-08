@@ -26,3 +26,4 @@ master
 ------
 
 * Added test for Django 3 using Python 3.7 in tox.ini
+* Improved performance of fake_text
