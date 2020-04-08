@@ -50,8 +50,10 @@ def lazy_attribute(lazy_fn):
 
 class BaseAnonymizer(object):
     def run(self, select_chunk_size=None, **bulk_update_kwargs):
+        self._declarations = self.get_declarations()
+
         queryset = self.get_queryset()
-        update_fields = list(self.get_declarations().keys())
+        update_fields = list(self._declarations.keys())
         update_batch_size = bulk_update_kwargs.pop(
             "batch_size", self._meta.update_batch_size
         )
@@ -121,17 +123,21 @@ class BaseAnonymizer(object):
     def patch_object(self, obj):
         """ Update object attributes with fake data provided by replacers
         """
-        replacers = self.get_declarations()
-        for field, replacer in replacers.items():
-            if not getattr(obj, field):
-                pass  # empty data should be kept as is
-            elif isinstance(replacer, LazyAttribute):
+        # using obj.__dict__ instead of getattr for performance reasons
+        # see https://stackoverflow.com/a/9791053/639465
+        fields = [field for field in self._declarations if obj.__dict__[field]]
+
+        for field in fields:
+            replacer = self._declarations[field]
+            if isinstance(replacer, LazyAttribute):
                 # Pass in obj for LazyAttributes
-                setattr(obj, field, replacer(obj))
+                new_value = replacer(obj)
             elif callable(replacer):
-                setattr(obj, field, replacer())
+                new_value = replacer()
             else:
-                setattr(obj, field, replacer)
+                new_value = replacer
+
+            obj.__dict__[field] = new_value
 
         self.clean(obj)
 
