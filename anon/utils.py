@@ -188,19 +188,45 @@ _WORD_LIST = [
     "voluptatum",
 ]
 
-# The _avg_word_size holds the average size of word sample
+
+try:
+    xrange
+except NameError:
+    # Python 2/3 proof
+    xrange = range
+
+
+def _cycle_over_sample_range(start, end, sample_size):
+    """
+    Given a range (start, end), returns a generator that will cycle over a population
+    sample with size specified by ``sample_size``
+    """
+    return itertools.cycle(random.sample(xrange(start, end), sample_size))
+
+
+# Holds the average size of word sample
 _avg_word_size = sum(map(len, _WORD_LIST)) / len(_WORD_LIST)
 
-# The _word_generator holds a generator that each iteration returns a
-# different word
+# Holds a generator that each iteration returns a different word
 _word_generator = itertools.cycle(_WORD_LIST)
 
 # Holds the size of smallest word in _WORD_LIST and is used to define bounds
 _min_word_size = len(sorted(_WORD_LIST, key=lambda w: len(w))[0])
 
-# The number_generatator holds a generator that each iteration returns a
-# different number
+# Holds a generator that each iteration returns a different number
 _number_generator = itertools.cycle("86306894249026785203141")
+
+# Holds a generator for small integers, same as Django's PositiveSmallIntegerField
+_small_int_generator = _cycle_over_sample_range(0, 32767, 1000)
+
+# Holds a generator for small signed integers, same as Django's SmallIntegerField
+_small_signed_int_generator = _cycle_over_sample_range(-32768, 32767, 1000)
+
+# Holds a generator for integers, same as Django's PositiveIntegerField
+_int_generator = _cycle_over_sample_range(0, 2147483647, 10000)
+
+# Holds a generator for signed integers, same as Django's IntegerField
+_signed_int_generator = _cycle_over_sample_range(-2147483648, 2147483647, 100000)
 
 
 def fake_word(min_size=_min_word_size, max_size=20):
@@ -257,7 +283,7 @@ def fake_name(max_size=15):
     return fake_text(max_size=max_size).title()
 
 
-def fake_username(max_size=10, separator="", rand_range=(1000, 999999)):
+def fake_username(max_size=10, separator=""):
     """ Returns fake username
 
     :max_size: Maximum number of chars
@@ -265,13 +291,7 @@ def fake_username(max_size=10, separator="", rand_range=(1000, 999999)):
     :rand_range: Range to use when generating random number
 
     """
-    rand_start, rand_end = rand_range
-    if not rand_end > rand_start:
-        raise ValueError(
-            "rand_range start ({}) must be > end ({})".format(rand_start, rand_end)
-        )
-
-    random_number = str(random.randint(rand_start, rand_end))
+    random_number = str(next(_small_int_generator))
     min_size_allowed = _min_word_size + len(random_number)
 
     if max_size < min_size_allowed:
