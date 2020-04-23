@@ -172,7 +172,7 @@ class BaseAnonymizer(object):
         """ Return list of class attributes, which also includes methods and
             subclasses, ignoring any magic methods and reserved attributes
         """
-        reserved_names = ["Meta", "clean"]
+        reserved_names = list(BaseAnonymizer.__dict__.keys()) + ["Meta"]
 
         return {
             name: self.__class__.__dict__[name]
