@@ -119,7 +119,7 @@ Built-in functions
    fake_text(max_size=255, max_diff_allowed=5, separator=' ')
    fake_small_text(max_size=50)
    fake_name(max_size=15)
-   fake_username(max_size=10, separator='', rand_range=(1000, 999999))
+   fake_username(max_size=10, separator='')
    fake_email(max_size=25, suffix='@example.com')
    fake_url(max_size=50, scheme='http://', suffix='.com')
    fake_phone_number(format='999-999-9999')

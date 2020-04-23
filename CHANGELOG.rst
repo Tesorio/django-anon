@@ -29,3 +29,5 @@ master
 * Improved performance of fake_text
 * Improved performance of BaseAnonymizer.patch_object
 * Fix bug with get_queryset not being treated as reserved name
+* Improved performance of fake_username
+* Removed rand_range argument from fake_username (backwards incompatible)
