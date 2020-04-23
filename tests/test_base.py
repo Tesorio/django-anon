@@ -188,5 +188,8 @@ class BaseTestCase(TestCase):
             c = anon.lazy_attribute(lambda o: 6)
             b = anon.lazy_attribute(lambda o: 5)
 
+            def get_queryset(self):
+                return []
+
         anonymizer = Anon()
         self.assertEqual(list(anonymizer.get_declarations().keys()), ["a", "c", "b"])
