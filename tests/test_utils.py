@@ -28,6 +28,7 @@ class UtilsTestCase(TestCase):
     def test_fake_username(self):
         text = utils.fake_username(45, separator="_")
         self.assertIn("_", text)
+        self.assertLessEqual(len(text), 45)
 
     def test_fake_email(self):
         text = utils.fake_email(20)
