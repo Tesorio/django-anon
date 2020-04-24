@@ -100,10 +100,10 @@ class BaseAnonymizer(object):
         meta = self.Meta()
         if not hasattr(meta, "select_chunk_size"):
             # Chunk size to iterate over
-            meta.select_chunk_size = 1000
+            meta.select_chunk_size = 5000
         if not hasattr(meta, "update_batch_size"):
             # Batch size for bulk updates
-            meta.update_batch_size = 50
+            meta.update_batch_size = 200
         return meta
 
     _meta = property(get_meta)
