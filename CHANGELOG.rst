@@ -31,3 +31,4 @@ master
 * Fix bug with get_queryset not being treated as reserved name
 * Improved performance of fake_username
 * Removed rand_range argument from fake_username (backwards incompatible)
+* Changed select_chunk_size and update_batch_size to saner defaults
