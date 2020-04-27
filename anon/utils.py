@@ -235,6 +235,12 @@ def fake_word(min_size=_min_word_size, max_size=20):
     :min_size: Minimum number of chars
     :max_size: Maximum number of chars
 
+    Example:
+
+    >>> import django_anon as anon
+    >>> print(anon.fake_word())
+    adipisci
+
     """
     if min_size < _min_word_size:
         raise ValueError("no such word with this size < min_size")
@@ -250,6 +256,11 @@ def fake_text(max_size=255, max_diff_allowed=5, separator=" "):
     :max_size: Maximum number of chars
     :max_diff_allowed: Maximum difference (fidelity) allowed, in chars number
     :separator: Word separator
+
+    Example:
+
+    >>> print(anon.fake_text())
+    alias aliquam aliquid amet animi aperiam architecto asperiores aspernatur assumenda at atque aut autem beatae blanditiis commodi consectetur consequatur consequuntur corporis corrupti culpa cum cumque cupiditate debitis delectus deleniti deserunt dicta
 
     """
     if max_diff_allowed < 1:
@@ -270,6 +281,11 @@ def fake_small_text(max_size=50):
 
     :max_size: Maximum number of chars
 
+    Example:
+
+    >>> print(anon.fake_small_text())
+    Distinctio Dolor Dolore Dolorem Doloremque Dolores
+
     """
     return fake_text(max_size=max_size).title()
 
@@ -278,6 +294,11 @@ def fake_name(max_size=15):
     """ Preset for fake_text. Also returns capitalized words.
 
     :max_size: Maximum number of chars
+
+    Example:
+
+    >>> print(anon.fake_name())
+    Doloribus Ea
 
     """
     return fake_text(max_size=max_size).title()
@@ -289,6 +310,11 @@ def fake_username(max_size=10, separator=""):
     :max_size: Maximum number of chars
     :separator: Word separator
     :rand_range: Range to use when generating random number
+
+    Example:
+
+    >>> print(anon.fake_username())
+    eius54455
 
     """
     random_number = str(next(_small_int_generator))
@@ -307,6 +333,11 @@ def fake_email(max_size=25, suffix="@example.com"):
 
     :max_size: Maximum number of chars
     :suffix: Suffix to add to email addresses (including @)
+
+    Example:
+
+    >>> print(anon.fake_email())
+    enim120238@example.com
 
     """
     min_size_allowed = _min_word_size + len(suffix)
@@ -329,6 +360,11 @@ def fake_url(max_size=50, scheme="http://", suffix=".com"):
     :scheme: URL scheme (http://)
     :suffix: Suffix to add to domain (including dot)
 
+    Example:
+
+    >>> print(anon.fake_url())
+    http://facilis.fuga.fugiat.fugit.harum.hic.id.com
+
     """
     min_size_allowed = _min_word_size + len(scheme) + len(suffix)
 
@@ -345,6 +381,11 @@ def fake_phone_number(format="999-999-9999"):
     """ Returns a fake phone number in the desired format
 
     :format: Format of phone number to generate
+
+    Example:
+
+    >>> print(anon.fake_phone_number())
+    863-068-9424
 
     """
     number = []

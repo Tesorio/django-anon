@@ -1,5 +1,5 @@
 Changelog
-#########
+=========
 
 **django-anon**'s release numbering works as follows:
 
@@ -9,7 +9,7 @@ Changelog
 
 
 Releases
-########
+--------
 
 .. contents::
    :local:
@@ -17,13 +17,13 @@ Releases
 
 
 0.1
----
+~~~
 
 * Initial release
 
 
 master
-------
+~~~~~~
 
 * Added test for Django 3 using Python 3.7 in tox.ini
 * Improved performance of fake_text

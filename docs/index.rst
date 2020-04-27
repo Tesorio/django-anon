@@ -1,15 +1,17 @@
 .. include:: ../README.rst
+   :end-before: start-table-of-contents
 
 
-Contents
-========
+Table of Contents
+=================
 
 .. toctree::
    :maxdepth: 2
 
    introduction
-   fakedata
+   usage
    reference
+   contributing
    changelog
 
 

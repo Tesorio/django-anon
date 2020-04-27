@@ -38,11 +38,11 @@ class LazyAttribute(OrderedDeclaration):
 def lazy_attribute(lazy_fn):
     """ Returns LazyAttribute objects, that basically marks functions that
         should take `obj` as first parameter. This is useful when you need
-        to take in consideration other values of `obj`, for example::
+        to take in consideration other values of `obj`
 
-            first_name = faker.name
-            last_name = faker.name
-            full_name = lazy_attribute(o: o.first_name + o.last_name)
+        Example:
+
+        >>> full_name = lazy_attribute(o: o.first_name + o.last_name)
 
     """
     return LazyAttribute(lazy_fn)
