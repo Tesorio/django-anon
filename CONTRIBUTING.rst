@@ -1,5 +1,5 @@
-Contributing to django-anon
-###########################
+Contributing
+============
 
 As an open source project, **django-anon** welcomes contributions of many forms.
 
@@ -9,16 +9,19 @@ Examples of contributions include:
 * Documentation improvements
 * Bug reports and code reviews
 
+.. start-table-of-contents
 
 Table of Contents
-#################
+-----------------
 
 .. contents::
    :local:
+
+.. end-table-of-contents
    
 
 Code of conduct
-===============
+---------------
 
 Please keep the tone polite & professional. First impressions count, so let's try to make everyone feel welcome.
 
@@ -28,7 +31,7 @@ The `Django code of conduct <https://www.djangoproject.com/conduct/>`_ gives a f
 
 
 Issues
-======
+------
 
 Some tips on good issue reporting:
 
@@ -39,7 +42,7 @@ Some tips on good issue reporting:
 
 
 Development
-===========
+-----------
 
 To start developing on **django-anon**, clone the repo:
 
@@ -51,7 +54,7 @@ Changes should broadly follow the PEP 8 style conventions, and we recommend you 
 
 
 Coding Style
-============
+------------
 
 `The Black code style <https://github.com/psf/black#the-black-code-style>`_ is used across the whole codebase. Ideally, you should configure your editor to auto format the code. This means you can use **88 characters per line**, rather than 79 as defined by PEP 8.
 
@@ -65,7 +68,7 @@ Don't be afraid, all specifications for linters are defined in ``pyproject.toml`
 
 
 Testing
-=======
+-------
 
 To run the tests, clone the repository, and then:
 
@@ -82,7 +85,7 @@ To run the tests, clone the repository, and then:
 
 
 Running against multiple environments
-=====================================
+-------------------------------------
 
 You can also use the excellent tox testing tool to run the tests against all supported versions of Python and Django. Install tox globally, and then simply run:
 
@@ -92,7 +95,7 @@ You can also use the excellent tox testing tool to run the tests against all sup
 
 
 Using pre-commit hook
-=====================
+---------------------
 
 CI will perform some checks during the build, but to save time, most of the checks can be ran locally beforing pushing code. To do this, we use `pre-commit <https://pre-commit.com/#install>`_ hooks. All you need to do, is to install and configure pre-commit:
 
@@ -102,7 +105,7 @@ CI will perform some checks during the build, but to save time, most of the chec
 
 
 Pull requests
-=============
+-------------
 
 It's a good idea to make pull requests early on. A pull request represents the start of a discussion, and doesn't necessarily need to be the final, finished submission.
 
@@ -118,7 +121,7 @@ Once you've made a pull request take a look at the CircleCI build status and mak
 
 
 Documentation
-=============
+-------------
 
 **django-anon** uses the Sphinx documentation system and is built from the ``.rst`` source files in the ``docs/`` directory.
 
@@ -138,7 +141,7 @@ To get started contributing, you’ll want to read the `reStructuredText referen
 
 
 Language style
-==============
+--------------
 
 Documentation should be in American English. The tone of the documentation is very important - try to stick to a simple, plain, objective and well-balanced style where possible.
 
@@ -149,7 +152,7 @@ Some other tips:
 
 
 References
-==========
+----------
 
 * https://github.com/encode/django-rest-framework/blob/master/CONTRIBUTING.md
 * https://docs.djangoproject.com/en/dev/internals/contributing/

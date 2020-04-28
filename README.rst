@@ -59,8 +59,12 @@ in a production-like environment.
 
 .. image:: https://raw.githubusercontent.com/Tesorio/django-anon/master/django-anon-recording.gif
 
+.. start-features
+
 Features
-########
+========
+
+.. start-features-table
 
 .. csv-table::
 
@@ -69,32 +73,52 @@ Features
    "🐩", "**Elegant** solution following consolidated patterns from projects like `Django <https://djangoproject.com/>`_ and `Factory Boy <https://factoryboy.readthedocs.io/en/latest/index.html>`_"
    "🔨", "**Powerful**. It can be used on any projects, not only Django, not only Python. Really!"
 
+.. end-features-table
+.. end-features
+.. start-table-of-contents
+
 Table of Contents
-#################
+=================
 .. contents::
    :local:
 
+.. end-table-of-contents
+.. start-introduction
+
+
 Installation
-============
+------------
 
 .. code::
 
    pip install django-anon
+
    
-Versions we have tested against
-===============================
+Supported versions
+------------------
 
 * Python (2.7, 3.7)
 * Django (1.8, 1.11, 2.2, 3.0)
 
+
+License
+-------
+
+`MIT <https://github.com/Tesorio/django-anon/blob/master/LICENSE>`_
+
+.. end-introduction
+.. start-usage
+
+
 Usage
-=====
+-----
 
 Use ``anon.BaseAnonymizer`` to define your anonymizer classes:
 
 .. code-block:: python
 
    import anon
+
    from your_app.models import Person
 
    class PersonAnonymizer(anon.BaseAnonymizer):
@@ -111,22 +135,24 @@ Use ``anon.BaseAnonymizer`` to define your anonymizer classes:
 
 
 Built-in functions
-------------------
+~~~~~~~~~~~~~~~~~~
 
 .. code:: python
 
-   fake_word(min_size=_min_word_size, max_size=20)
-   fake_text(max_size=255, max_diff_allowed=5, separator=' ')
-   fake_small_text(max_size=50)
-   fake_name(max_size=15)
-   fake_username(max_size=10, separator='')
-   fake_email(max_size=25, suffix='@example.com')
-   fake_url(max_size=50, scheme='http://', suffix='.com')
-   fake_phone_number(format='999-999-9999')
+   import anon
+
+   anon.fake_word(min_size=_min_word_size, max_size=20)
+   anon.fake_text(max_size=255, max_diff_allowed=5, separator=' ')
+   anon.fake_small_text(max_size=50)
+   anon.fake_name(max_size=15)
+   anon.fake_username(max_size=10, separator='')
+   anon.fake_email(max_size=25, suffix='@example.com')
+   anon.fake_url(max_size=50, scheme='http://', suffix='.com')
+   anon.fake_phone_number(format='999-999-9999')
 
 
 Lazy attributes
----------------
+~~~~~~~~~~~~~~~
 
 Lazy attributes can be defined as inline lambdas or methods, as shown below,
 using the ``anon.lazy_attribute`` function/decorator.
@@ -134,6 +160,7 @@ using the ``anon.lazy_attribute`` function/decorator.
 .. code-block:: python
 
    import anon
+
    from your_app.models import Person
 
    class PersonAnonymizer(anon.BaseAnonymizer):
@@ -149,7 +176,7 @@ using the ``anon.lazy_attribute`` function/decorator.
 
 
 The clean method
-----------------
+~~~~~~~~~~~~~~~~
 
 .. code-block:: python
 
@@ -165,13 +192,14 @@ The clean method
 
 
 Defining a custom QuerySet
---------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 A custom QuerySet can be used to select the rows that should be anonymized:
 
 .. code-block:: python
 
    import anon
+
    from your_app.models import Person
 
    class PersonAnonymizer(anon.BaseAnonymizer):
@@ -186,7 +214,7 @@ A custom QuerySet can be used to select the rows that should be anonymized:
 
 
 High-quality fake data
-----------------------
+~~~~~~~~~~~~~~~~~~~~~~
 
 In order to be really fast, **django-anon** uses it's own algorithm to generate fake data. It is
 really fast, but the generated data is not pretty. If you need something prettier in terms of data,
@@ -196,6 +224,7 @@ out-of-the-box as the below:
 .. code-block:: python
 
    import anon
+
    from faker import Faker
    from your_app.models import Address
 
@@ -207,21 +236,17 @@ out-of-the-box as the below:
       class Meta:
          model = Address
 
+.. end-usage
 
 Changelog
-=========
+---------
 
 Check out `CHANGELOG.rst <https://github.com/Tesorio/django-anon/blob/master/CHANGELOG.rst>`_ for release notes
 
 Contributing
-============
+------------
 
 Check out `CONTRIBUTING.rst <https://github.com/Tesorio/django-anon/blob/master/CONTRIBUTING.rst>`_ for information about getting involved
-
-License
-=======
-
-`MIT <https://github.com/Tesorio/django-anon/blob/master/LICENSE>`_
 
 ----
 
