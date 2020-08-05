@@ -20,8 +20,8 @@
     </p>
 
     <p align="center">
-      <a href="https://circleci.com/gh/Tesorio/django-anon">
-        <img src="https://circleci.com/gh/Tesorio/django-anon.svg?style=svg&circle-token=373da2a214669014ef040e5a06a7f1a974902daa">
+      <a href="https://github.com/Tesorio/django-anon/actions?query=branch%3Amaster">
+        <img src="https://github.com/Tesorio/django-anon/workflows/CI/badge.svg?branch=master">
       </a>
       <a href="https://django-anon.readthedocs.io/en/latest/">
         <img src="https://readthedocs.org/projects/pip/badge/?version=latest&style=flat">
