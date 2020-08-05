@@ -98,5 +98,5 @@ jobs:
       with:
         python-version: "3.7"
 
-    - run: python -m pip install isort==4.3.21
+    - run: python -m pip install isort[pyproject]==4.3.21
     - run: isort -rc --check-only .
