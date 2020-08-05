@@ -117,7 +117,7 @@ GitHub's documentation for working on pull requests is `available here. <https:/
 
 Always run the tests before submitting pull requests, and ideally run tox in order to check that your modifications are compatible on all supported versions of Python and Django.
 
-Once you've made a pull request take a look at the CircleCI build status and make sure the tests are running as you'd expect.
+Once you've made a pull request take a look at GitHub Checks and make sure the tests are running as you'd expect.
 
 
 Documentation
