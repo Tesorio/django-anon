@@ -64,7 +64,7 @@ setup(
     name="django-anon",
     version=VERSION,
     packages=find_packages(),
-    install_requires=["django-bulk-update", "django-chunkator"],
+    install_requires=["django-bulk-update", "django-chunkator<2"],
     cmdclass={"publish": PublishCommand, "tag": CreateTagCommand},
     # metadata for upload to PyPI
     description="Anonymize production data so it can be safely used in not-so-safe environments",
