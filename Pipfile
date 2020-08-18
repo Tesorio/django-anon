@@ -8,6 +8,7 @@ sphinx = "*"
 sphinx-rtd-theme = "*"
 sphinx-autobuild = "*"
 tox = "*"
+twine = "*"
 
 [packages]
 django-bulk-update = "*"

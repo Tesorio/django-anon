@@ -36,7 +36,11 @@ class PublishCommand(Command):
     user_options = []
 
     def run(self):
+        # Build & Upload
+        # https://packaging.python.org/tutorials/packaging-projects/#generating-distribution-archives
+        # https://packaging.python.org/tutorials/packaging-projects/#uploading-the-distribution-archives
         os.system("python setup.py sdist bdist_wheel")
+        os.system("twine upload dist/*")
 
     def initialize_options(self):
         pass
