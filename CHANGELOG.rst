@@ -15,6 +15,17 @@ Releases
    :local:
 
 
+0.2
+~~~
+
+* Added test for Django 3 using Python 3.7 in tox.ini
+* Improved performance of fake_text
+* Improved performance of BaseAnonymizer.patch_object
+* Fix bug with get_queryset not being treated as reserved name
+* Improved performance of fake_username
+* Removed rand_range argument from fake_username (backwards incompatible)
+* Changed select_chunk_size and update_batch_size to saner defaults
+
 
 0.1
 ~~~
@@ -25,10 +36,3 @@ Releases
 master
 ~~~~~~
 
-* Added test for Django 3 using Python 3.7 in tox.ini
-* Improved performance of fake_text
-* Improved performance of BaseAnonymizer.patch_object
-* Fix bug with get_queryset not being treated as reserved name
-* Improved performance of fake_username
-* Removed rand_range argument from fake_username (backwards incompatible)
-* Changed select_chunk_size and update_batch_size to saner defaults

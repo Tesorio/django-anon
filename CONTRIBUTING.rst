@@ -151,6 +151,17 @@ Some other tips:
 * Don't use abbreviations such as 'e.g.' but instead use the long form, such as 'For example'.
 
 
+Releasing a new version
+-----------------------
+
+1. Bump the version in ``anon/__init__.py``
+2. Update the ``CHANGELOG`` file, moving items up from master to the new version
+3. Submit a PR and wait for it to get approved/merged
+4. Checkout to the corresponding commit and create a new tag: ``python setup.py tag``
+5. Build documentation for the new version (Requires access to ReadtheDocs.org)
+6. Publish: ``python setup.py publish`` (Requires access to PyPI)
+
+
 References
 ----------
 
