@@ -1,3 +1,4 @@
+# deps
 from django_bulk_update.helper import bulk_update as ext_bulk_update
 
 
