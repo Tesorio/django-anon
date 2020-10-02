@@ -3,8 +3,8 @@ from collections import OrderedDict
 from logging import getLogger
 
 # deps
-from chunkator import chunkator_page
 from anon.compat import bulk_update
+from chunkator import chunkator_page
 
 
 logger = getLogger(__name__)
