@@ -4,7 +4,7 @@ from logging import getLogger
 
 # deps
 from chunkator import chunkator_page
-from django_bulk_update.helper import bulk_update
+from anon.compat import bulk_update
 
 
 logger = getLogger(__name__)
@@ -86,6 +86,7 @@ class BaseAnonymizer(object):
 
             bulk_update(
                 objs,
+                self.get_manager(),
                 **dict(
                     update_fields=update_fields,
                     batch_size=update_batch_size,
