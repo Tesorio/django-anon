@@ -41,7 +41,9 @@ class CompatTestCase(TestCase):
 
         obj = Obj()
         self.assertFalse(hasattr(manager, "bulk_update"))
-        bulk_update(objects=[obj], manager=manager, batch_size=42, update_fields=["first_name"])
+        bulk_update(
+            objects=[obj], manager=manager, batch_size=42, update_fields=["first_name"]
+        )
         ext_bulk_update.assert_called_once_with(
             [obj], batch_size=42, update_fields=["first_name"]
         )
