@@ -8,10 +8,8 @@ from .compat import mock
 
 
 class CompatTestCase(TestCase):
-
     @mock.patch("anon.compat.ext_bulk_update")
     def test_call_inbuilt_bulk_update(self, ext_bulk_update):
-
         class Manager:
             def bulk_update(self, objects, **kwargs):
                 pass
