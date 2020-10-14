@@ -36,3 +36,4 @@ Releases
 master
 ~~~~~~
 
+* Updated bulk_update method to use Django's built-in method if available

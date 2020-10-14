@@ -87,6 +87,7 @@ class BaseTestCase(TestCase):
             class Meta:
                 model = mock.Mock(__name__="x")
                 update_batch_size = 42
+                manager = object()
 
             first_name = "xyz"
 
@@ -105,7 +106,7 @@ class BaseTestCase(TestCase):
 
         anonymizer.patch_object.assert_called_once_with(obj)
         bulk_update.assert_called_once_with(
-            [obj], batch_size=42, update_fields=["first_name"]
+            [obj], anonymizer.get_manager(), batch_size=42, update_fields=["first_name"]
         )
 
     def test_lazy_attribute(self):
