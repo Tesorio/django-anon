@@ -20,6 +20,7 @@ master
 
 * Updated bulk_update method to use Django's built-in method if available
 * Changed default ``max_size`` for ``fake_email`` to ``40``
+* Fixed error in ``fake_text`` when ``max_size`` is too short
 
 
 0.2
