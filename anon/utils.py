@@ -328,7 +328,7 @@ def fake_username(max_size=10, separator=""):
     return fake_text(max_size, separator=separator) + random_number
 
 
-def fake_email(max_size=25, suffix="@example.com"):
+def fake_email(max_size=40, suffix="@example.com"):
     """ Returns fake email address
 
     :max_size: Maximum number of chars

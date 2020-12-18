@@ -15,6 +15,13 @@ Releases
    :local:
 
 
+master
+~~~~~~
+
+* Updated bulk_update method to use Django's built-in method if available
+* Changed default ``max_size`` for ``fake_email`` to ``40``
+
+
 0.2
 ~~~
 
@@ -31,9 +38,3 @@ Releases
 ~~~
 
 * Initial release
-
-
-master
-~~~~~~
-
-* Updated bulk_update method to use Django's built-in method if available
