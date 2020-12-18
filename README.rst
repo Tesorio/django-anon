@@ -146,7 +146,7 @@ Built-in functions
    anon.fake_small_text(max_size=50)
    anon.fake_name(max_size=15)
    anon.fake_username(max_size=10, separator='')
-   anon.fake_email(max_size=25, suffix='@example.com')
+   anon.fake_email(max_size=40, suffix='@example.com')
    anon.fake_url(max_size=50, scheme='http://', suffix='.com')
    anon.fake_phone_number(format='999-999-9999')
 
