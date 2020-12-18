@@ -204,8 +204,8 @@ def _cycle_over_sample_range(start, end, sample_size):
     return itertools.cycle(random.sample(xrange(start, end), sample_size))
 
 
-# Holds the average size of word sample
-_avg_word_size = sum(map(len, _WORD_LIST)) / len(_WORD_LIST)
+# Holds the maximum size of word sample
+_max_word_size = max(len(s) for s in _WORD_LIST)
 
 # Holds a generator that each iteration returns a different word
 _word_generator = itertools.cycle(_WORD_LIST)
@@ -266,12 +266,15 @@ def fake_text(max_size=255, max_diff_allowed=5, separator=" "):
     if max_diff_allowed < 1:
         raise ValueError("max_diff_allowed must be > 0")
 
-    num_words = int(max_size / _avg_word_size)
+    num_words = max(1, int(max_size / _max_word_size))
     words = itertools.islice(_word_generator, num_words)
 
     text = separator.join(words)
-    while len(text) > max_size:
-        text = text[: text.rindex(separator)]
+    try:
+        while len(text) > max_size:
+            text = text[: text.rindex(separator)]
+    except ValueError:
+        text = text[:max_size]
 
     return text
 
