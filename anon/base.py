@@ -88,12 +88,9 @@ class BaseAnonymizer(object):
 
             bulk_update(
                 objs,
+                update_fields,
                 self.get_manager(),
-                **dict(
-                    update_fields=update_fields,
-                    batch_size=update_batch_size,
-                    **bulk_update_kwargs
-                )
+                **dict(batch_size=update_batch_size, **bulk_update_kwargs)
             )
 
         if current_batch == 0:

@@ -2,7 +2,7 @@
 from django_bulk_update.helper import bulk_update as ext_bulk_update
 
 
-def bulk_update(objects, manager, **bulk_update_kwargs):
+def bulk_update(objects, fields, manager, **bulk_update_kwargs):
     """Updates the list of objects using django queryset's
     inbuilt ``.bulk_update()`` method if present, else
     django_bulk_update's ``bulk_update()`` will be used
@@ -16,6 +16,6 @@ def bulk_update(objects, manager, **bulk_update_kwargs):
     :rtype: None
     """
     try:
-        manager.bulk_update(objects, **bulk_update_kwargs)
+        manager.bulk_update(objects, fields, **bulk_update_kwargs)
     except AttributeError:
-        ext_bulk_update(objects, **bulk_update_kwargs)
+        ext_bulk_update(objects, update_fields=fields, **bulk_update_kwargs)

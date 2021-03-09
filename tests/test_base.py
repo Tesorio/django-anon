@@ -4,7 +4,7 @@ from django.test import TestCase
 # local
 import anon
 
-from .compat import mock
+from . import models
 
 
 class BaseAnonymizer(anon.BaseAnonymizer):
@@ -30,33 +30,24 @@ class BaseTestCase(TestCase):
         self.assertIsInstance(anonymizer._meta, Anon.Meta)
 
     def test_get_manager(self):
-        manager = object()
-
-        m = mock.Mock()
-        m.other_manager = manager
-
         class Anon(BaseAnonymizer):
             class Meta:
-                model = m
-                manager = m.other_manager
+                model = models.Person
+                manager = models.PersonAnotherQuerySet
 
         anonymizer = Anon()
-        self.assertEqual(anonymizer.get_manager(), manager)
+        self.assertEqual(anonymizer.get_manager(), models.PersonAnotherQuerySet)
 
     def test_get_queryset(self):
-        sample_obj = object()
-
-        m = mock.Mock()
-        m.objects.all.return_value = [sample_obj]
+        sample_obj = models.person_factory()
 
         class Anon(BaseAnonymizer):
             class Meta:
-                model = m
+                model = models.Person
 
         anonymizer = Anon()
         result = anonymizer.get_queryset()
-        self.assertEqual(result, [sample_obj])
-        m.objects.all.assert_called_once()
+        self.assertSequenceEqual(result, [sample_obj])
 
     def test_patch_object(self):
         fake_first_name = lambda: "foo"  # noqa: E731
@@ -64,99 +55,65 @@ class BaseTestCase(TestCase):
         class Anon(BaseAnonymizer):
             first_name = fake_first_name
             last_name = fake_first_name
-            raw_data = {1: 2}
+            raw_data = "{1: 2}"
 
-        class Obj(object):
-            def __init__(self):
-                self.first_name = "zzz"
-                self.last_name = ""  # empty data should be kept empty
-                self.raw_data = {}
-
-        obj = Obj()
+        obj = models.person_factory(last_name="")  # empty data should be kept empty
 
         anonymizer = Anon()
         anonymizer.patch_object(obj)
         self.assertEqual(obj.first_name, "foo")
         self.assertEqual(obj.last_name, "")
-        self.assertEqual(obj.raw_data, {})
+        self.assertEqual(obj.raw_data, "{1: 2}")
 
-    @mock.patch("anon.base.bulk_update")
-    @mock.patch("anon.base.chunkator_page")
-    def test_run(self, chunkator_page, bulk_update):
+    def test_run(self):
         class Anon(BaseAnonymizer):
             class Meta:
-                model = mock.Mock(__name__="x")
+                model = models.Person
                 update_batch_size = 42
-                manager = object()
 
             first_name = "xyz"
 
-        class Obj(object):
-            def __init__(self):
-                self.first_name = "zzz"
-
-        obj = Obj()
-
-        chunkator_page.return_value = [[obj]]
+        obj = models.person_factory()
 
         anonymizer = Anon()
-        anonymizer.get_queryset = mock.Mock(return_value=[obj])
-        anonymizer.patch_object = mock.Mock()
         anonymizer.run()
 
-        anonymizer.patch_object.assert_called_once_with(obj)
-        bulk_update.assert_called_once_with(
-            [obj], anonymizer.get_manager(), batch_size=42, update_fields=["first_name"]
-        )
+        obj.refresh_from_db()
+        self.assertEqual(obj.first_name, "xyz")
 
     def test_lazy_attribute(self):
-        lazy_fn = mock.Mock()
-        fake_first_name = anon.lazy_attribute(lazy_fn)
+        fake_first_name = anon.lazy_attribute(lambda o: o.last_name)
 
         class Anon(BaseAnonymizer):
             first_name = fake_first_name
 
-        class Obj(object):
-            def __init__(self):
-                self.first_name = "zzz"
-
-        obj = Obj()
+        obj = models.person_factory()
 
         anonymizer = Anon()
         anonymizer.patch_object(obj)
-        lazy_fn.assert_called_once_with(obj)
+        self.assertEqual(obj.first_name, obj.last_name)
 
     def test_lazy_attribute_decorator(self):
-        lazy_fn = mock.Mock()
-
         class Anon(BaseAnonymizer):
             @anon.lazy_attribute
             def first_name(self):
-                return lazy_fn(self)
+                return "xyz"
 
-        class Obj(object):
-            def __init__(self):
-                self.first_name = "zzz"
-
-        obj = Obj()
+        obj = models.person_factory()
 
         anonymizer = Anon()
         anonymizer.patch_object(obj)
-        lazy_fn.assert_called_once_with(obj)
+        self.assertEqual(obj.first_name, "xyz")
 
     def test_raw_attributes(self):
         class Anon(BaseAnonymizer):
-            raw_data = {}
+            raw_data = "{}"
 
-        class Obj(object):
-            def __init__(self):
-                self.raw_data = {"password": "xyz"}
-
-        obj = Obj()
+        obj = models.person_factory()
 
         anonymizer = Anon()
         anonymizer.patch_object(obj)
-        self.assertEqual(obj.raw_data, {})
+        self.assertEqual(obj.raw_data, "{}")
 
     def test_clean(self):
         class Anon(BaseAnonymizer):
@@ -168,13 +125,7 @@ class BaseTestCase(TestCase):
                 obj.line1 = "foo"
                 obj.line2 = "bar"
 
-        class Obj(object):
-            def __init__(self):
-                self.line1 = "X"
-                self.line2 = "Y"
-                self.line3 = "Z"
-
-        obj = Obj()
+        obj = models.person_factory()
 
         anonymizer = Anon()
         anonymizer.patch_object(obj)
