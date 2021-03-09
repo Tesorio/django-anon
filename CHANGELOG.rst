@@ -21,6 +21,12 @@ master
 * ...
 
 
+0.3.1
+~~~~~
+
+* Fixed bug that happens with newer versions of Django (> 2.2) #63
+
+
 0.3
 ~~~
 
