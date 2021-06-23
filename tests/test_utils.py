@@ -43,3 +43,7 @@ class UtilsTestCase(TestCase):
     def test_fake_phone_number(self):
         text = utils.fake_phone_number(format="(99) 9999-9999")
         self.assertTrue(bool(re.match(r"^\(\d{2}\) \d{4}-\d{4}$", text)))
+
+    def test_trim_text_empty_separator(self):
+        text = utils._trim_text(text="example", separator="", max_size=5)
+        self.assertTrue(len(text) <= 5)
