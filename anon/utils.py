@@ -205,10 +205,8 @@ def _cycle_over_sample_range(start, end, sample_size):
 
 
 def _trim_text(text, separator, max_size):
-    try:
-        return text[: text.rindex(separator)]
-    except ValueError:
-        return text[:max_size]
+    limit = min(text.rindex(separator), max_size)
+    return text[:limit]
 
 
 # Holds the maximum size of word sample
