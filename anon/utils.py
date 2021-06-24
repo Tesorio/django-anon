@@ -275,8 +275,11 @@ def fake_text(max_size=255, max_diff_allowed=5, separator=" "):
     words = itertools.islice(_word_generator, num_words)
 
     text = separator.join(words)
-    if len(text) > max_size:
-        text = _trim_text(text, separator, max_size)
+    try:
+        if len(text) > max_size:
+            text = _trim_text(text, separator, max_size)
+    except ValueError:
+        text = text[:max_size]
 
     return text
 
