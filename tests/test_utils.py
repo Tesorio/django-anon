@@ -46,8 +46,8 @@ class UtilsTestCase(TestCase):
 
     def test_trim_text_empty_separator(self):
         text = utils._trim_text(text="example", separator="", max_size=5)
-        self.assertTrue(len(text) <= 5)
+        self.assertLessEqual(len(text), 5)
 
     def test_fake_text_short_length_trimming(self):
         text = utils.fake_text(4)
-        self.assertTrue(len(text) <= 4)
+        self.assertLessEqual(len(text), 4)
