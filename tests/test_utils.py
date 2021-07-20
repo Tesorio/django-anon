@@ -1,5 +1,7 @@
 # stdlib
+from mock import patch
 import re
+from signal import SIGALRM, alarm, signal
 
 # deps
 from django.test import TestCase
@@ -29,6 +31,24 @@ class UtilsTestCase(TestCase):
         text = utils.fake_username(45, separator="_")
         self.assertIn("_", text)
         self.assertLessEqual(len(text), 45)
+
+    @patch('anon.utils._word_generator', ["placeholder"])
+    def test_fake_username_duration(self):
+        method = utils.fake_username
+        timeout_seconds = 1
+
+        def timeout_handler(signum, frame):
+            raise RuntimeError(
+                "{} method call exceeded {} second timeout".format(
+                    method.__name__,
+                    timeout_seconds
+                )
+            )
+
+        signal(SIGALRM, timeout_handler)
+        alarm(timeout_seconds)
+
+        method(max_size=10)
 
     def test_fake_email(self):
         text = utils.fake_email(20)
