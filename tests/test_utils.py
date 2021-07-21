@@ -32,7 +32,7 @@ class UtilsTestCase(TestCase):
         self.assertIn("_", text)
         self.assertLessEqual(len(text), 45)
 
-    @patch('anon.utils._word_generator', ["placeholder"])
+    @patch("anon.utils._word_generator", ["placeholder"])
     def test_fake_username_duration(self):
         method = utils.fake_username
         timeout_seconds = 1
@@ -40,8 +40,7 @@ class UtilsTestCase(TestCase):
         def timeout_handler(signum, frame):
             raise RuntimeError(
                 "{} method call exceeded {} second timeout".format(
-                    method.__name__,
-                    timeout_seconds
+                    method.__name__, timeout_seconds
                 )
             )
 
