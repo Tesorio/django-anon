@@ -18,7 +18,7 @@ Releases
 master
 ~~~~~~
 
-* ...
+* Add regression test for fake_username infinite loop condition
 
 
 0.3.1
