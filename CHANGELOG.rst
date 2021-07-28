@@ -18,7 +18,7 @@ Releases
 master
 ~~~~~~
 
-* Add regression test and apply fix for fake_username infinite loop condition
+* Fixed an infinite loop condition in ``fake_username`` when using the default empty separator
 
 
 0.3.1
