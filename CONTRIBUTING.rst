@@ -155,11 +155,11 @@ Releasing a new version
 -----------------------
 
 1. Bump the version in ``anon/__init__.py``
-2. Update the ``CHANGELOG`` file, moving items up from master to the new version
+2. Update the ``CHANGELOG.rst`` file, moving items up from master to the new version
 3. Submit a PR and wait for it to get approved/merged
 4. Checkout to the corresponding commit and create a new tag: ``python setup.py tag``
-5. Build documentation for the new version (Requires access to ReadtheDocs.org)
-6. Publish: ``python setup.py publish`` (Requires access to PyPI)
+5. `Publish the new release <https://github.com/Tesorio/django-anon/releases/new>`_ in GitHub
+6. Publish the new release in PyPI: ``python setup.py publish`` (Requires access to PyPI)
 
 
 References
