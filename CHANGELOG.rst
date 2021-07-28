@@ -18,7 +18,8 @@ Releases
 master
 ~~~~~~
 
-...
+* Dropped support for Django 1.8
+* ...
 
 
 0.3.2
