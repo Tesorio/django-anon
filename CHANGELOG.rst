@@ -18,6 +18,12 @@ Releases
 master
 ~~~~~~
 
+...
+
+
+0.3.2
+~~~~~
+
 * Fixed an infinite loop condition in ``fake_username`` when using the default empty separator
 
 
