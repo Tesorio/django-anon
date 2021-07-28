@@ -204,6 +204,11 @@ def _cycle_over_sample_range(start, end, sample_size):
     return itertools.cycle(random.sample(xrange(start, end), sample_size))
 
 
+def _trim_text(text, separator, max_size):
+    limit = min(text.rindex(separator), max_size)
+    return text[:limit]
+
+
 # Holds the maximum size of word sample
 _max_word_size = max(len(s) for s in _WORD_LIST)
 
@@ -271,8 +276,8 @@ def fake_text(max_size=255, max_diff_allowed=5, separator=" "):
 
     text = separator.join(words)
     try:
-        while len(text) > max_size:
-            text = text[: text.rindex(separator)]
+        if len(text) > max_size:
+            text = _trim_text(text, separator, max_size)
     except ValueError:
         text = text[:max_size]
 

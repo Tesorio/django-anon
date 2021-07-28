@@ -18,7 +18,7 @@ Releases
 master
 ~~~~~~
 
-* ...
+* Fixed an infinite loop condition in ``fake_username`` when using the default empty separator
 
 
 0.3.1
