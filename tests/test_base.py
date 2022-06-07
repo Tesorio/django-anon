@@ -81,6 +81,23 @@ class BaseTestCase(TestCase):
         obj.refresh_from_db()
         self.assertEqual(obj.first_name, "xyz")
 
+    def test_run_without_fields(self):
+        class Anon(BaseAnonymizer):
+            def clean(self, obj):
+                obj.first_name = "xyz"
+                obj.save()
+
+            class Meta:
+                model = models.Person
+
+        obj = models.person_factory()
+
+        anonymizer = Anon()
+        anonymizer.run()
+
+        obj.refresh_from_db()
+        self.assertEqual(obj.first_name, "xyz")
+
     def test_lazy_attribute(self):
         fake_first_name = anon.lazy_attribute(lambda o: o.last_name)
 

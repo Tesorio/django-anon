@@ -56,6 +56,7 @@ class BaseAnonymizer(object):
 
         queryset = self.get_queryset()
         update_fields = list(self._declarations.keys())
+
         update_batch_size = bulk_update_kwargs.pop(
             "batch_size", self._meta.update_batch_size
         )
@@ -86,12 +87,19 @@ class BaseAnonymizer(object):
                 self.patch_object(obj)
                 objs.append(obj)
 
-            bulk_update(
-                objs,
-                update_fields,
-                self.get_manager(),
-                **dict(batch_size=update_batch_size, **bulk_update_kwargs)
-            )
+            if update_fields:
+                bulk_update(
+                    objs,
+                    update_fields,
+                    self.get_manager(),
+                    **dict(batch_size=update_batch_size, **bulk_update_kwargs)
+                )
+            else:
+                logger.info(
+                    "Skiping bulk update for {}... No fields to update".format(
+                        model_name
+                    )
+                )
 
         if current_batch == 0:
             logger.info("{} has no records".format(model_name))
