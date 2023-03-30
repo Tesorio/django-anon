@@ -98,7 +98,7 @@ Supported versions
 ------------------
 
 * Python (3.7+)
-* Django (2.2, 3.0)
+* Django (3.0, 4)
 
 
 License
