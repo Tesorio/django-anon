@@ -97,8 +97,8 @@ Installation
 Supported versions
 ------------------
 
-* Python (2.7, 3.7)
-* Django (1.11, 2.2, 3.0)
+* Python (3.7+)
+* Django (3.0, 4)
 
 
 License
