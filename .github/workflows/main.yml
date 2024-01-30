@@ -20,18 +20,21 @@ jobs:
     strategy:
       matrix:
         python-version:
-          - py27-django111
-          - py3-django2
-          - py3-django3
+          - "3.7"
+          - "3.8"
+          - "3.9"
+          - "3.10"
+          - "3.11"
+          - "3.12"
 
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
         with:
-          python-version: "3.7"
+          python-version: ${{ matrix.python-version }}
 
-      - run: pip install tox
-      - run: tox -e ${{ matrix.python-version }}
+      - run: pip install tox tox-gh-actions
+      - run: tox
 
   ############
   # Coverage #
@@ -40,10 +43,10 @@ jobs:
   coverage:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/setup-python@v1
-      - uses: actions/checkout@v1
+      - uses: actions/setup-python@v2
+      - uses: actions/checkout@v2
 
-      - run: pip install coverage
+      - run: pip install coverage setuptools
 
       - run: python setup.py install
       - run: coverage run runtests.py
@@ -69,7 +72,7 @@ jobs:
       with:
         python-version: "3.7"
 
-    - run: python -m pip install black==19.10b0
+    - run: python -m pip install black==19.10b0 click==8.0.4
     - run: black --safe --check --diff .
 
 
@@ -83,7 +86,7 @@ jobs:
     - uses: actions/checkout@v2
     - uses: actions/setup-python@v2
       with:
-        python-version: "2.7"
+        python-version: "3.7"
 
     - run: python -m pip install flake8==3.3.0
     - run: flake8 --config=.flake8 .
