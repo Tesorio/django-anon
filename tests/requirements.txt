@@ -1,2 +1,2 @@
 django-bulk-update
-django-chunkator
+django-chunkator<2
