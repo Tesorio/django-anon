@@ -13,7 +13,6 @@
 import os
 import sys
 
-
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
@@ -23,14 +22,14 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(".")))
 
 # -- Project information -----------------------------------------------------
 
-project = u"django-anon"
-copyright = u"2019, Tesorio"
-author = u"Tesorio"
+project = "django-anon"
+copyright = "2019, Tesorio"
+author = "Tesorio"
 
 # The short X.Y version
-version = u""
+version = ""
 # The full version, including alpha/beta/rc tags
-release = u""
+release = ""
 
 
 # -- General configuration ---------------------------------------------------
@@ -68,7 +67,7 @@ language = None
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path.
-exclude_patterns = [u"_build", "Thumbs.db", ".DS_Store"]
+exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
 
 # The name of the Pygments (syntax highlighting) style to use.
 pygments_style = None
@@ -130,7 +129,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, "django-anon.tex", u"django-anon Documentation", u"Tesorio", "manual"),
+    (master_doc, "django-anon.tex", "django-anon Documentation", "Tesorio", "manual"),
 ]
 
 
@@ -138,7 +137,7 @@ latex_documents = [
 
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
-man_pages = [(master_doc, "django-anon", u"django-anon Documentation", [author], 1)]
+man_pages = [(master_doc, "django-anon", "django-anon Documentation", [author], 1)]
 
 
 # -- Options for Texinfo output ----------------------------------------------
@@ -150,7 +149,7 @@ texinfo_documents = [
     (
         master_doc,
         "django-anon",
-        u"django-anon Documentation",
+        "django-anon Documentation",
         author,
         "django-anon",
         "One line description of project.",

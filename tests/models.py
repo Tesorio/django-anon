@@ -1,4 +1,3 @@
-# deps
 from django.db import models
 
 

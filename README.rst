@@ -33,7 +33,7 @@
         <img src="https://img.shields.io/pypi/v/django-anon.svg?color=blue">
       </a>
     </p>
-    
+
     <p align="center">
       <a href="#installation">
         Install
@@ -93,12 +93,12 @@ Installation
 
    pip install django-anon
 
-   
+
 Supported versions
 ------------------
 
-* Python (2.7, 3.7)
-* Django (1.11, 2.2, 3.0)
+* Python 3.10+
+* Django 4.2+
 
 
 License
@@ -123,7 +123,7 @@ Use ``anon.BaseAnonymizer`` to define your anonymizer classes:
 
    class PersonAnonymizer(anon.BaseAnonymizer):
       email = anon.fake_email
-      
+
       # You can use static values instead of callables
       is_admin = False
 

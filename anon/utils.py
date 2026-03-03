@@ -2,7 +2,6 @@
 import itertools
 import random
 
-
 _WORD_LIST = [
     "a",
     "ab",
@@ -235,7 +234,7 @@ _signed_int_generator = _cycle_over_sample_range(-2147483648, 2147483647, 100000
 
 
 def fake_word(min_size=_min_word_size, max_size=20):
-    """ Return fake word
+    """Return fake word
 
     :min_size: Minimum number of chars
     :max_size: Maximum number of chars
@@ -256,7 +255,7 @@ def fake_word(min_size=_min_word_size, max_size=20):
 
 
 def fake_text(max_size=255, max_diff_allowed=5, separator=" "):
-    """ Return fake text
+    """Return fake text
 
     :max_size: Maximum number of chars
     :max_diff_allowed: Maximum difference (fidelity) allowed, in chars number
@@ -285,7 +284,7 @@ def fake_text(max_size=255, max_diff_allowed=5, separator=" "):
 
 
 def fake_small_text(max_size=50):
-    """ Preset for fake_text.
+    """Preset for fake_text.
 
     :max_size: Maximum number of chars
 
@@ -299,7 +298,7 @@ def fake_small_text(max_size=50):
 
 
 def fake_name(max_size=15):
-    """ Preset for fake_text. Also returns capitalized words.
+    """Preset for fake_text. Also returns capitalized words.
 
     :max_size: Maximum number of chars
 
@@ -313,7 +312,7 @@ def fake_name(max_size=15):
 
 
 def fake_username(max_size=10, separator=""):
-    """ Returns fake username
+    """Returns fake username
 
     :max_size: Maximum number of chars
     :separator: Word separator
@@ -337,7 +336,7 @@ def fake_username(max_size=10, separator=""):
 
 
 def fake_email(max_size=40, suffix="@example.com"):
-    """ Returns fake email address
+    """Returns fake email address
 
     :max_size: Maximum number of chars
     :suffix: Suffix to add to email addresses (including @)
@@ -362,7 +361,7 @@ def fake_email(max_size=40, suffix="@example.com"):
 
 
 def fake_url(max_size=50, scheme="http://", suffix=".com"):
-    """ Returns fake URL
+    """Returns fake URL
 
     :max_size: Maximum number of chars
     :scheme: URL scheme (http://)
@@ -386,7 +385,7 @@ def fake_url(max_size=50, scheme="http://", suffix=".com"):
 
 
 def fake_phone_number(format="999-999-9999"):
-    """ Returns a fake phone number in the desired format
+    """Returns a fake phone number in the desired format
 
     :format: Format of phone number to generate
 

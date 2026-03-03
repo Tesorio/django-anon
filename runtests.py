@@ -6,9 +6,7 @@
 import os
 import sys
 
-# deps
 import django
-
 
 if __name__ == "__main__":
     os.environ["DJANGO_SETTINGS_MODULE"] = "tests.settings"

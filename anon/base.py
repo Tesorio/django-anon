@@ -8,17 +8,16 @@ from chunkator import chunkator_page
 # local
 from anon.compat import bulk_update
 
-
 logger = getLogger(__name__)
 
 
 class OrderedDeclaration(object):
-    """ Any classes inheriting from this will have an unique global counter
-        associated with it. This counter is used to determine the order in
-        which fields were declarated
+    """Any classes inheriting from this will have an unique global counter
+    associated with it. This counter is used to determine the order in
+    which fields were declarated
 
-        Idea taken from: https://stackoverflow.com/a/4460034/639465
-        Also inspired by https://github.com/FactoryBoy/factory_boy
+    Idea taken from: https://stackoverflow.com/a/4460034/639465
+    Also inspired by https://github.com/FactoryBoy/factory_boy
     """
 
     global_counter = 0
@@ -38,13 +37,13 @@ class LazyAttribute(OrderedDeclaration):
 
 
 def lazy_attribute(lazy_fn):
-    """ Returns LazyAttribute objects, that basically marks functions that
-        should take `obj` as first parameter. This is useful when you need
-        to take in consideration other values of `obj`
+    """Returns LazyAttribute objects, that basically marks functions that
+    should take `obj` as first parameter. This is useful when you need
+    to take in consideration other values of `obj`
 
-        Example:
+    Example:
 
-        >>> full_name = lazy_attribute(o: o.first_name + o.last_name)
+    >>> full_name = lazy_attribute(o: o.first_name + o.last_name)
 
     """
     return LazyAttribute(lazy_fn)
@@ -92,7 +91,7 @@ class BaseAnonymizer(object):
                     objs,
                     update_fields,
                     self.get_manager(),
-                    **dict(batch_size=update_batch_size, **bulk_update_kwargs)
+                    **dict(batch_size=update_batch_size, **bulk_update_kwargs),
                 )
             else:
                 logger.info(
@@ -123,14 +122,13 @@ class BaseAnonymizer(object):
     _manager = property(get_manager)
 
     def get_queryset(self):
-        """ Override this if you want to delimit the objects that should be
-            affected by anonymization
+        """Override this if you want to delimit the objects that should be
+        affected by anonymization
         """
         return self.get_manager().all()
 
     def patch_object(self, obj):
-        """ Update object attributes with fake data provided by replacers
-        """
+        """Update object attributes with fake data provided by replacers"""
         # using obj.__dict__ instead of getattr for performance reasons
         # see https://stackoverflow.com/a/9791053/639465
         fields = [field for field in self._declarations if obj.__dict__[field]]
@@ -150,17 +148,17 @@ class BaseAnonymizer(object):
         self.clean(obj)
 
     def clean(self, obj):
-        """ Use this function if you need to update additional data that may
-            rely on multiple fields, or if you need to update multiple fields
-            at once
+        """Use this function if you need to update additional data that may
+        rely on multiple fields, or if you need to update multiple fields
+        at once
         """
         pass
 
     def get_declarations(self):
-        """ Returns ordered declarations. Any non-ordered declarations, for
-            example any types that does not inherit from OrderedDeclaration
-            will come first, as they are considered "raw" values and should
-            not be affected by the order of other non-ordered declarations
+        """Returns ordered declarations. Any non-ordered declarations, for
+        example any types that does not inherit from OrderedDeclaration
+        will come first, as they are considered "raw" values and should
+        not be affected by the order of other non-ordered declarations
         """
 
         def _sort_declaration(declaration):
@@ -177,8 +175,8 @@ class BaseAnonymizer(object):
         return OrderedDict(sorted_declarations)
 
     def _get_class_attributes(self):
-        """ Return list of class attributes, which also includes methods and
-            subclasses, ignoring any magic methods and reserved attributes
+        """Return list of class attributes, which also includes methods and
+        subclasses, ignoring any magic methods and reserved attributes
         """
         reserved_names = list(BaseAnonymizer.__dict__.keys()) + ["Meta"]
 

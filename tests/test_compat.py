@@ -1,4 +1,3 @@
-# deps
 from django.test import TestCase
 
 # local

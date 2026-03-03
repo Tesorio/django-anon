@@ -4,7 +4,6 @@ import os
 # deps
 from setuptools import Command, find_packages, setup
 
-
 # Dynamically calculate the version based on anon.VERSION
 VERSION = __import__("anon").__version__
 

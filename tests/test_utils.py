@@ -1,7 +1,6 @@
 # stdlib
 import re
 
-# deps
 from django.test import TestCase
 
 # local

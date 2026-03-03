@@ -1,105 +1,103 @@
 name: CI
 
 on:
-  push:
-    branches: [master]
-  pull_request:
-    branches: [master]
-  schedule:
-    # Run every sunday
-    - cron:  '0 0 * * 0'
+    push:
+        branches: [master]
+    pull_request:
+        branches: [master]
+    schedule:
+        # Run every sunday
+        - cron: "0 0 * * 0"
 
 jobs:
+    ########
+    # Test #
+    ########
 
-  ########
-  # Test #
-  ########
+    test:
+        runs-on: ubuntu-latest
+        strategy:
+            matrix:
+                python-version:
+                    - "3.10"
+                    - "3.11"
+                    - "3.12"
+                    - "3.13"
+                    - "3.14"
 
-  test:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version:
-          - py27-django111
-          - py3-django2
-          - py3-django3
+        steps:
+            - uses: actions/checkout@v2
+            - uses: actions/setup-python@v2
+              with:
+                  python-version: ${{ matrix.python-version }}
 
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-python@v2
-        with:
-          python-version: "3.7"
+            - run: pip install tox tox-gh-actions
+            - run: tox
 
-      - run: pip install tox
-      - run: tox -e ${{ matrix.python-version }}
+    ############
+    # Coverage #
+    ############
 
-  ############
-  # Coverage #
-  ############
+    coverage:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/setup-python@v2
+            - uses: actions/checkout@v2
 
-  coverage:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/setup-python@v1
-      - uses: actions/checkout@v1
+            - run: pip install coverage setuptools
 
-      - run: pip install coverage
+            - run: python setup.py install
+            - run: coverage run runtests.py
+            - run: coverage xml
 
-      - run: python setup.py install
-      - run: coverage run runtests.py
-      - run: coverage xml
+            - name: Coverage monitor
+              uses: 5monkeys/cobertura-action@master
+              with:
+                  repo_token: ${{ secrets.GITHUB_TOKEN }}
+                  path: coverage.xml
+                  minimum_coverage: 50
 
-      - name: Coverage monitor
-        uses: 5monkeys/cobertura-action@master
-        with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          path: coverage.xml
-          minimum_coverage: 50
+    #########
+    # Black #
+    #########
 
+    black:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v2
+            - uses: actions/setup-python@v2
+              with:
+                  python-version: "3.13"
 
-  #########
-  # Black #
-  #########
+            - run: python -m pip install black==26.1.0 click==8.0.4
+            - run: black --safe --check --diff .
 
-  black:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - uses: actions/setup-python@v2
-      with:
-        python-version: "3.7"
+    ##########
+    # Flake8 #
+    ##########
 
-    - run: python -m pip install black==19.10b0
-    - run: black --safe --check --diff .
+    flake8:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v2
+            - uses: actions/setup-python@v2
+              with:
+                  python-version: "3.13"
 
+            - run: python -m pip install flake8==7.3.0
+            - run: flake8 --config=.flake8 .
 
-  ##########
-  # Flake8 #
-  ##########
+    ##########
+    # isort #
+    ##########
 
-  flake8:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - uses: actions/setup-python@v2
-      with:
-        python-version: "2.7"
+    isort:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v2
+            - uses: actions/setup-python@v2
+              with:
+                  python-version: "3.13"
 
-    - run: python -m pip install flake8==3.3.0
-    - run: flake8 --config=.flake8 .
-
-
-  ##########
-  # isort #
-  ##########
-
-  isort:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - uses: actions/setup-python@v2
-      with:
-        python-version: "3.7"
-
-    - run: python -m pip install isort[pyproject]==4.3.21
-    - run: isort -rc --check-only .
+            - run: python -m pip install isort==8.0.1
+            - run: isort -rc --check-only .
